@@ -1,0 +1,13 @@
+<?php
+
+class Author extends BaseModel {
+
+	// Add your validation rules here
+	public static $rules = [
+		'name' => 'required|unique:authors,name,:id'
+	];
+
+	// Don't forget to fill this array
+	protected $fillable = ['name'];
+
+}

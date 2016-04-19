@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistem Informasi Perijinan Boyolali</title>
+  <style type="text/css">
+                .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;width: 100%; }
+                .tg td{font-family:Arial;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
+                .tg th{font-family:Arial;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
+                .tg .tg-3wr7{font-weight:bold;font-size:12px;font-family:"Arial", Helvetica, sans-serif !important;;text-align:center}
+                .tg .tg-ti5e{font-size:10px;font-family:"Arial", Helvetica, sans-serif !important;;text-align:center}
+                .tg .tg-rv4w{font-size:10px;font-family:"Arial", Helvetica, sans-serif !important;}
+    </style>
+</head>
+<body>
+    <div style="font-family:Arial; font-size:16px;">
+            <center><h2>Berkas Visitasi Perijinan</h2></center> 
+    </div>
+    <br>
+    <table class="tg">
+        <thead>
+            <tr>
+                <td class="tg-3wr7">Nama</td>
+                <td class="tg-3wr7">Lokasi</td>
+                <td class="tg-3wr7">Keterangan</td>
+                <td class="tg-3wr7">Email</td>
+                <td class="tg-3wr7">Tanggal Visitasi</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="tg-rv4w">{{ $visitasiapoteks->nama }}</td>
+                <td class="tg-rv4w">{{ $visitasiapoteks->lokasi }}</td>
+                <td class="tg-rv4w">{{ $visitasiapoteks->verifikasi }}</td>
+                <td class="tg-rv4w">{{ $visitasiapoteks->email }}</td>
+                <td class="tg-rv4w">{{ $visitasiapoteks->created_at }}</td>          
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+    <span id="todays_date" style="font-family:Arial; font-size:14px;">
+  <p>Boyolali 5 April 2016</p>
+  <p>Petugas Surat Perijinan</p>
+  <br>
+  <p>...................................</p>
+  </span>
+</body>
+</html>
