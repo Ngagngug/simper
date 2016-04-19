@@ -109,7 +109,9 @@ class VerifikasikliniksController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		for($i=1; $i < 11; $i++) {
+		$data = Verifikasiklinik::all();
+
+		for($i=0; $i < count($data); $i++) {
 
 			$temp = (string)$i;
 
@@ -121,29 +123,16 @@ class VerifikasikliniksController extends \BaseController {
 
 		}
 
-		$data = Verifikasiklinik::all();
-
-		$status = array(
-			$syarat[1],
-			$syarat[2],
-			$syarat[3],
-			$syarat[4],
-			$syarat[5],
-			$syarat[6],
-			$syarat[7],
-			$syarat[8],
-			$syarat[9],
-			$syarat[10]); 
-
 		$syaratString = array(
 		'nama'	   => $verifikasiklinik->nama,
 		'data'	   => $data,
-		'status'   => $status
+		'syarat'   => $syarat
 		);
 
 		
-		for($i=1; $i < 11; $i++) {
-			if(	$syarat[1] === 'Lengkap' &&
+		for($i=0; $i < count($data); $i++) {
+			if(	$syarat[0] === 'Lengkap' &&
+			$syarat[1] === 'Lengkap' && 
 			$syarat[2] === 'Lengkap' && 
 			$syarat[3] === 'Lengkap' && 
 			$syarat[4] === 'Lengkap' && 
@@ -151,8 +140,7 @@ class VerifikasikliniksController extends \BaseController {
 			$syarat[6] === 'Lengkap' && 
 			$syarat[7] === 'Lengkap' && 
 			$syarat[8] === 'Lengkap' && 
-			$syarat[9] === 'Lengkap' && 
-			$syarat[10] === 'Lengkap'
+			$syarat[9] === 'Lengkap'
 			) 
 		{
 			$verifikasiklinik->verifikasi = "Proses Visitasi";

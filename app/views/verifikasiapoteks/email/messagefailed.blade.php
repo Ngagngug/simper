@@ -11,8 +11,8 @@
 		<p>Sebagai bagian dari proses registrasi perijinan, dengan ini kami memberitahukan bahwa kelengkapan yang telah anda lampirkan belum lengkap dan saat ini masih dalam proses verifikasi. Adapun untuk kelanjutan proses verifikasi diharapkan anda melakukan pengumpulan ulang syarat proses perijinan. Adapun kelengkapan yang sudah lengkap dapat dilihat sebagai berikut :    
 		</p>
 		
-	  		@for($i=0;$i<23;$i++)
-		    {{ "<b>".$status[$i]."</b>"." ".$data[$i]->id.". ".$data[$i]->kelengkapan }} <br>
+	  		@for($i=0;$i<count($data);$i++)
+		    {{ "<b>".$syarat[$i]."</b>"." ".$data[$i]->id.". ".$data[$i]->kelengkapan }} <br>
 			@endfor
 		
 		<p>

@@ -9,18 +9,14 @@
                     <table class="table table-hover table-striped">
                       <tbody>
 
-
-                      @foreach ($data as $data)  
-                        
-                          {{-- The current value is {{ $i }} --}}
+                       @for($i=0;$i<count($data);$i++)
                           <tr>
                           <!-- <td><input type="checkbox" name="syarat[]" value="Syarat1"></td> -->
-                          <td>{{ Form::checkbox('syarat'.$data->id, 'yes', true) }}</td>
-                          <td class="mailbox-subject"><b> {{ $data->id.". ".$data->kelengkapan }} </b> </td>
+                          <td>{{ Form::checkbox('syarat'.$i, 'yes', true) }}</td>
+                          <td class="mailbox-subject"><b> {{ $data[$i]->id.". ".$data[$i]->kelengkapan }} </b> </td>
                         </tr>
-                                             
-                      @endforeach
-      
+                       @endfor
+
                       </tbody>
                     </table><!-- /.table -->
                   </div><!-- /.mail-box-messages -->

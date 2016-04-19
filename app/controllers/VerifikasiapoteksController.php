@@ -113,7 +113,9 @@ class VerifikasiapoteksController extends \BaseController {
 
 		//$email = DB::table('penggunas')->select('email')->get();
 
-		for($i=1; $i < 24; $i++) {
+		$data = Verifikasiapotek::all();
+
+		for($i=0; $i < count($data); $i++) {
 
 			$temp = (string)$i;
 
@@ -125,41 +127,15 @@ class VerifikasiapoteksController extends \BaseController {
 
 		}
 
-		$data = Verifikasiapotek::all();
-
-		$status = array(
-			$syarat[1],
-			$syarat[2],
-			$syarat[3],
-			$syarat[4],
-			$syarat[5],
-			$syarat[6],
-			$syarat[7],
-			$syarat[8],
-			$syarat[9],
-			$syarat[10],
-			$syarat[11],
-			$syarat[12],
-			$syarat[13],
-			$syarat[14],
-			$syarat[15],
-			$syarat[16],
-			$syarat[17],
-			$syarat[18],
-			$syarat[19],
-			$syarat[20],
-			$syarat[21],
-			$syarat[22],
-			$syarat[23]); 
-
 		$syaratString = array(
 		'nama'	   => $verifikasiapotek->nama,
 		'data'	   => $data,
-		'status'   => $status
+		'syarat'   => $syarat
 		);
 
-		for($i=1; $i < 24; $i++) {
-			if(	$syarat[1] === 'Lengkap' &&
+		for($i=0; $i < count($data); $i++) {
+			if(	$syarat[0] === 'Lengkap' &&
+			$syarat[1] === 'Lengkap' && 
 			$syarat[2] === 'Lengkap' && 
 			$syarat[3] === 'Lengkap' && 
 			$syarat[4] === 'Lengkap' && 
@@ -178,10 +154,9 @@ class VerifikasiapoteksController extends \BaseController {
 			$syarat[17] === 'Lengkap' && 
 			$syarat[18] === 'Lengkap' && 
 			$syarat[19] === 'Lengkap' && 
-			$syarat[20] === 'Lengkap' && 
+			$syarat[20] === 'Lengkap' &&
 			$syarat[21] === 'Lengkap' &&
-			$syarat[22] === 'Lengkap' &&
-			$syarat[23] === 'Lengkap' 
+			$syarat[22] === 'Lengkap' 
 			) 
 		{
 			$verifikasiapotek->verifikasi = "Proses Visitasi";
