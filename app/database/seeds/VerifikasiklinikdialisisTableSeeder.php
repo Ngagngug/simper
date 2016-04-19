@@ -23,7 +23,7 @@ class VerifikasiklinikdialisisTableSeeder extends Seeder {
 			', 'created_at'=>'2016-04-18 11:15:22', 'updated_at'=>'2016-04-18 11:15:22'],
 			 ['id'=>6, 'kelengkapan'=>'Pasfoto pemohon uk. 4x6 = 4 lbr, uk. 2x3 = 1 lbr
 			', 'created_at'=>'2016-04-18 11:15:22', 'updated_at'=>'2016-04-18 11:15:22'],
-			 ['id'=>7, 'FC izin HO
+			 ['id'=>7, 'kelengkapan'=>'FC izin HO
 			', 'created_at'=>'2016-04-18 11:15:22', 'updated_at'=>'2016-04-18 11:15:22'],
 			 ['id'=>8, 'kelengkapan'=>'Proposal / Study Kelayakan
 			', 'created_at'=>'2016-04-18 11:15:22', 'updated_at'=>'2016-04-18 11:15:22'],

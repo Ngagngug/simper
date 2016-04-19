@@ -125,6 +125,33 @@ class VerifikasiapoteksController extends \BaseController {
 
 		}
 
+		$data = Verifikasiapotek::all();
+
+		$status = array(
+			$syarat[1],
+			$syarat[2],
+			$syarat[3],
+			$syarat[4],
+			$syarat[5],
+			$syarat[6],
+			$syarat[7],
+			$syarat[8],
+			$syarat[9],
+			$syarat[10],
+			$syarat[11],
+			$syarat[12],
+			$syarat[13],
+			$syarat[14],
+			$syarat[15],
+			$syarat[16],
+			$syarat[17],
+			$syarat[18],
+			$syarat[19],
+			$syarat[20],
+			$syarat[21],
+			$syarat[22],
+			$syarat[23]); 
+
 		$syaratString = array(
 		'syarat1' => $syarat[1],
 		'syarat2' => $syarat[2],
@@ -149,7 +176,9 @@ class VerifikasiapoteksController extends \BaseController {
 		'syarat21' => $syarat[21],
 		'syarat22' => $syarat[22],
 		'syarat23' => $syarat[23],
-		'nama'	   => $verifikasiapotek->nama
+		'nama'	   => $verifikasiapotek->nama,
+		'data'	   => $data,
+		'status'   => $status
 		);
 
 		// if (Input::get('syarat1') === 'yes') {

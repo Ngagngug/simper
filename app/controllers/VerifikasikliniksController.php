@@ -123,6 +123,18 @@ class VerifikasikliniksController extends \BaseController {
 
 		$data = Verifikasiklinik::all();
 
+		$status = array(
+			$syarat[1],
+			$syarat[2],
+			$syarat[3],
+			$syarat[4],
+			$syarat[5],
+			$syarat[6],
+			$syarat[7],
+			$syarat[8],
+			$syarat[9],
+			$syarat[10]); 
+
 		$syaratString = array(
 		'syarat1' => $syarat[1],
 		'syarat2' => $syarat[2],
@@ -135,7 +147,8 @@ class VerifikasikliniksController extends \BaseController {
 		'syarat9' => $syarat[9],
 		'syarat10' => $syarat[10],
 		'nama'	   => $verifikasiklinik->nama,
-		'data'	   => $data
+		'data'	   => $data,
+		'status'   => $status
 		);
 
 		

@@ -120,6 +120,34 @@ class VerifikasiklinikdialisesController extends \BaseController {
 
 		$data = Verifikasiklinikdialise::all();
 
+		$status = array(
+			$syarat[1],
+			$syarat[2],
+			$syarat[3],
+			$syarat[4],
+			$syarat[5],
+			$syarat[6],
+			$syarat[7],
+			$syarat[8],
+			$syarat[9],
+			$syarat[10],
+			$syarat[11],
+			$syarat[12],
+			$syarat[13],
+			$syarat[14],
+			$syarat[15],
+			$syarat[16],
+			$syarat[17],
+			$syarat[18],
+			$syarat[19],
+			$syarat[20],
+			$syarat[21],
+			$syarat[22],
+			$syarat[23],
+			$syarat[24],
+			$syarat[25],); 
+
+
 		$syaratString = array(
 		'syarat1' => $syarat[1],
 		'syarat2' => $syarat[2],
@@ -147,7 +175,8 @@ class VerifikasiklinikdialisesController extends \BaseController {
 		'syarat24' => $syarat[24],
 		'syarat25' => $syarat[25],
 		'nama'	   => $verifikasiklinikdialise->nama,
-		'data'	   => $data
+		'data'	   => $data,
+		'status'   => $status
 		);
 
 		
