@@ -153,172 +153,10 @@ class VerifikasiapoteksController extends \BaseController {
 			$syarat[23]); 
 
 		$syaratString = array(
-		'syarat1' => $syarat[1],
-		'syarat2' => $syarat[2],
-		'syarat3' => $syarat[3],
-	    'syarat4' => $syarat[4],
-		'syarat5' => $syarat[5],
-		'syarat6' => $syarat[6],
-		'syarat7' => $syarat[7],
-		'syarat8' => $syarat[8],
-		'syarat9' => $syarat[9],
-		'syarat10' => $syarat[10],
-		'syarat11' => $syarat[11],
-		'syarat12' => $syarat[12],
-		'syarat13' => $syarat[13],
-		'syarat14' => $syarat[14],
-		'syarat15' => $syarat[15],
-		'syarat16' => $syarat[16],
-		'syarat17' => $syarat[17],
-		'syarat18' => $syarat[18],
-		'syarat19' => $syarat[19],
-		'syarat20' => $syarat[20],
-		'syarat21' => $syarat[21],
-		'syarat22' => $syarat[22],
-		'syarat23' => $syarat[23],
 		'nama'	   => $verifikasiapotek->nama,
 		'data'	   => $data,
 		'status'   => $status
 		);
-
-		// if (Input::get('syarat1') === 'yes') {
-		//     $syarat1 = 'Lengkap';
-		// } else {
-		// 	$syarat1 = 'Belum Lengkap';
-		// }
-
-		// if (Input::get('syarat2') === 'yes') {
-		//     $syarat2 = 'Lengkap';
-		// } else {
-		// 	$syarat2 = 'Belum Lengkap';
-		// }
-
-		// if (Input::get('syarat3') === 'yes') {
-		//     $syarat3 = 'Lengkap';
-		// } else {
-		// 	$syarat3 = 'Belum Lengkap';
-		// }
-
-		// if (Input::get('syarat4') === 'yes') {
-		//     $syarat4 = 'Lengkap';
-		// } else {
-		// 	$syarat4 = 'Belum Lengkap';
-		// }
-
-		// if (Input::get('syarat5') === 'yes') {
-		//     $syarat5 = 'Lengkap';
-		// } else {
-		// 	$syarat5 = 'Belum Lengkap';
-		// }
-
-		// if (Input::get('syarat6') === 'yes') {
-		//     $syarat6 = 'Lengkap';
-		// } else {
-		// 	$syarat6 = 'Belum Lengkap';
-		// }
-
-		//   if (Input::get('syarat7') === 'yes') {
-		//     $syarat7 = 'Lengkap';
-		// } else {
-		// 	$syarat7 = 'Belum Lengkap';
-		// }
-
-		//   if (Input::get('syarat8') === 'yes') {
-		//     $syarat8 = 'Lengkap';
-		// }  else {
-		// 	$syarat8 = 'Belum Lengkap';
-		// }
-
-		// if (Input::get('syarat9') === 'yes') {
-		//     $syarat9 = 'Lengkap';
-		// } else {
-		// 	$syarat9 = 'Belum Lengkap';
-		// }
-
-		//  if (Input::get('syarat10') === 'yes') {
-		//     $syarat10 = 'Lengkap';
-		// } else {
-		// 	$syarat10 = 'Belum Lengkap';
-		// }
-
-		//  if (Input::get('syarat11') === 'yes') {
-		//     $syarat11 = 'Lengkap';
-		// } else {
-		// 	$syarat11 = 'Belum Lengkap';
-		// }
-
-		//  if (Input::get('syarat12') === 'yes') {
-		//     $syarat12 = 'Lengkap';
-		// } else {
-		// 	$syarat12 = 'Belum Lengkap';
-		// }
-
-		//  if (Input::get('syarat13') === 'yes') {
-		//     $syarat13 = 'Lengkap';
-		// } else {
-		// 	$syarat13 = 'Belum Lengkap';
-		// }
-
-		//  if (Input::get('syarat14') === 'yes') {
-		//     $syarat14 = 'Lengkap';
-		// } else {
-		// 	$syarat14 = 'Belum Lengkap';
-		// }
-
-		//  if (Input::get('syarat15') === 'yes') {
-		//     $syarat15 = 'Lengkap';
-		// } else {
-		// 	$syarat15 = 'Belum Lengkap';
-		// }
-
-		//  if (Input::get('syarat16') === 'yes') {
-		//     $syarat16 = 'Lengkap';
-		// } else {
-		// 	$syarat16 = 'Belum Lengkap';
-		// }
-
-		//  if (Input::get('syarat17') === 'yes') {
-		//     $syarat17 = 'Lengkap';
-		// }  else {
-		// 	$syarat17 = 'Belum Lengkap';
-		// }
-
-		// if (Input::get('syarat18') === 'yes') {
-		//     $syarat18 = 'Lengkap';
-		// } else {
-		// 	$syarat18 = 'Belum Lengkap';
-		// }
-
-		//  if (Input::get('syarat19') === 'yes') {
-		//     $syarat19 = 'Lengkap';
-		// }  else {
-		// 	$syarat19 = 'Belum Lengkap';
-		// }
-
-		// if (Input::get('syarat20') === 'yes') {
-		//     $syarat20 = 'Lengkap';
-		// } else {
-		// 	$syarat20 = 'Belum Lengkap';
-		// }
-
-		//  if (Input::get('syarat21') === 'yes') {
-		//     $syarat21 = 'Lengkap';
-		// }  else {
-		// 	$syarat21 = 'Belum Lengkap';
-		// }
-
-		// if (Input::get('syarat22') === 'yes') {
-		//     $syarat22 = 'Lengkap';
-		// }  else {
-		// 	$syarat22 = 'Belum Lengkap';
-		// }
-
-		// if (Input::get('syarat23') === 'yes') {
-		//     $syarat23 = 'Lengkap';
-		// } else {
-		// 	$syarat23 = 'Belum Lengkap';
-		// }
-
 
 		for($i=1; $i < 24; $i++) {
 			if(	$syarat[1] === 'Lengkap' &&
@@ -350,9 +188,9 @@ class VerifikasiapoteksController extends \BaseController {
 		} else {
 			$verifikasiapotek->verifikasi = "Verifikasi Belum Lengkap";
 		}
+		
 		}
 
-	
 		
 		$verifikasiapotek->save();
 		

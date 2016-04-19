@@ -136,16 +136,6 @@ class VerifikasikliniksController extends \BaseController {
 			$syarat[10]); 
 
 		$syaratString = array(
-		'syarat1' => $syarat[1],
-		'syarat2' => $syarat[2],
-		'syarat3' => $syarat[3],
-	    'syarat4' => $syarat[4],
-		'syarat5' => $syarat[5],
-		'syarat6' => $syarat[6],
-		'syarat7' => $syarat[7],
-		'syarat8' => $syarat[8],
-		'syarat9' => $syarat[9],
-		'syarat10' => $syarat[10],
 		'nama'	   => $verifikasiklinik->nama,
 		'data'	   => $data,
 		'status'   => $status
