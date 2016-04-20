@@ -52,6 +52,9 @@ Route::group(array('before' => 'auth'), function () {
         Route::get('verifikasiklinikdialises/export', array('as'=>'admin.verifikasiklinikdialises.export', 'uses'=>'VerifikasiklinikdialisesController@export'));
         Route::post('verifikasiklinikdialises/export-post', array('as'=>'admin.verifikasiklinikdialises.exportpost', 'uses'=>'VerifikasiklinikdialisesController@exportPost'));
         
+        Route::get('verifikasiklinikkecantikans/export', array('as'=>'admin.verifikasiklinikkecantikans.export', 'uses'=>'VerifikasiklinikkecantikansController@export'));
+        Route::post('verifikasiklinikkecantikans/export-post', array('as'=>'admin.verifikasiklinikkecantikans.exportpost', 'uses'=>'VerifikasiklinikkecantikansController@exportPost'));
+        
         Route::get('penggunas/export', array('as'=>'admin.penggunas.export', 'uses'=>'PenggunasController@export'));
         Route::post('penggunas/export-post', array('as'=>'admin.penggunas.exportpost', 'uses'=>'PenggunasController@exportPost'));
         Route::get('visitasiapoteks/export', array('as'=>'admin.visitasiapoteks.export', 'uses'=>'VisitasiapoteksController@export'));
@@ -59,10 +62,11 @@ Route::group(array('before' => 'auth'), function () {
         Route::resource('penggunas', 'PenggunasController');
     	Route::resource('perijinans', 'PerijinansController');
     	Route::resource('verifikasiapoteks', 'VerifikasiapoteksController');
-        Route::resource('visitasiapoteks', 'VisitasiapoteksController');
         Route::resource('verifikasikliniks', 'VerifikasikliniksController');
         Route::resource('verifikasiklinikdialises', 'VerifikasiklinikdialisesController');
         Route::resource('verifikasiklinikkecantikans', 'VerifikasiklinikkecantikansController');
+
+        Route::resource('visitasiapoteks', 'VisitasiapoteksController');
     });
 });
 

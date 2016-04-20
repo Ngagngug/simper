@@ -1,6 +1,6 @@
 <?php
 
-class Verifikasiklinikkecantikan extends \Eloquent {
+class Verifikasiklinikkecantikan extends BaseModel {
 
 	// Add your validation rules here
 	public static $rules = [

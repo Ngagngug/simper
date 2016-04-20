@@ -15,7 +15,7 @@ class CreateVerifikasiklinikkecantikansTable extends Migration {
 		Schema::create('verifikasiklinikkecantikans', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name');
+			$table->string('kelengkapan');
 			$table->timestamps();
 		});
 	}

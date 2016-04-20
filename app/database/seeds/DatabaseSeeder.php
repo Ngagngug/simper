@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('VerifikasiapoteksTableSeeder');
 		$this->call('VerifikasikliniksTableSeeder');
 		$this->call('VerifikasiklinikdialisisTableSeeder');
+		$this->call('VerifikasiklinikkecantikansTableSeeder');
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
 
