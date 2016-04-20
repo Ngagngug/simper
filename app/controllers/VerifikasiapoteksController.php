@@ -115,12 +115,15 @@ class VerifikasiapoteksController extends \BaseController {
 
 		$data = Verifikasiapotek::all();
 
+		$count = 0;
+
 		for($i=0; $i < count($data); $i++) {
 
 			$temp = (string)$i;
 
 			if (Input::get('syarat'.$i) === 'yes') {
 		    $syarat[$i] = 'Lengkap';
+		    $count++;
 			} else {
 			$syarat[$i] = 'Belum Lengkap';
 			}
@@ -133,43 +136,9 @@ class VerifikasiapoteksController extends \BaseController {
 		'syarat'   => $syarat
 		);
 
-		for($i=0; $i < count($data); $i++) {
-			if(	$syarat[0] === 'Lengkap' &&
-			$syarat[1] === 'Lengkap' && 
-			$syarat[2] === 'Lengkap' && 
-			$syarat[3] === 'Lengkap' && 
-			$syarat[4] === 'Lengkap' && 
-			$syarat[5] === 'Lengkap' && 
-			$syarat[6] === 'Lengkap' && 
-			$syarat[7] === 'Lengkap' && 
-			$syarat[8] === 'Lengkap' && 
-			$syarat[9] === 'Lengkap' && 
-			$syarat[10] === 'Lengkap' && 
-			$syarat[11] === 'Lengkap' && 
-			$syarat[12] === 'Lengkap' && 
-			$syarat[13] === 'Lengkap' && 
-			$syarat[14] === 'Lengkap' && 
-			$syarat[15] === 'Lengkap' && 
-			$syarat[16] === 'Lengkap' && 
-			$syarat[17] === 'Lengkap' && 
-			$syarat[18] === 'Lengkap' && 
-			$syarat[19] === 'Lengkap' && 
-			$syarat[20] === 'Lengkap' &&
-			$syarat[21] === 'Lengkap' &&
-			$syarat[22] === 'Lengkap' 
-			) 
-		{
-			$verifikasi->verifikasi = "Proses Visitasi";
-		} else {
-			$verifikasi->verifikasi = "Verifikasi Belum Lengkap";
-		}
-		
-		}
+		if( $count==count($data)) {
 
-		
-		$verifikasi->save();
-		
-		if('Proses Visitasi'==$verifikasi->verifikasi) {
+			$verifikasi->verifikasi = "Proses Visitasi";
 
 		 	Mail::send('verifikasiapoteks.email.messagesuccess',$syaratString, function($message) use($verifikasi){
        		 
@@ -179,6 +148,8 @@ class VerifikasiapoteksController extends \BaseController {
 
 		} else {
 
+			$verifikasi->verifikasi = "Verifikasi Belum Lengkap";
+
 			Mail::send('verifikasiapoteks.email.messagefailed', $syaratString, function($message) use($verifikasi){
        		 
        		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
@@ -186,6 +157,8 @@ class VerifikasiapoteksController extends \BaseController {
    		 	});
 
 		}
+
+		$verifikasi->save();
 
 		return Redirect::route('admin.verifikasiapoteks.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
 	}

@@ -111,12 +111,15 @@ class VerifikasikliniksController extends \BaseController {
 
 		$data = Verifikasiklinik::all();
 
+		$count = 0;
+
 		for($i=0; $i < count($data); $i++) {
 
 			$temp = (string)$i;
 
 			if (Input::get('syarat'.$i) === 'yes') {
 		    $syarat[$i] = 'Lengkap';
+		    $count++;
 			} else {
 			$syarat[$i] = 'Belum Lengkap';
 			}
@@ -128,31 +131,10 @@ class VerifikasikliniksController extends \BaseController {
 		'data'	   => $data,
 		'syarat'   => $syarat
 		);
-
 		
-		for($i=0; $i < count($data); $i++) {
-			if(	$syarat[0] === 'Lengkap' &&
-			$syarat[1] === 'Lengkap' && 
-			$syarat[2] === 'Lengkap' && 
-			$syarat[3] === 'Lengkap' && 
-			$syarat[4] === 'Lengkap' && 
-			$syarat[5] === 'Lengkap' && 
-			$syarat[6] === 'Lengkap' && 
-			$syarat[7] === 'Lengkap' && 
-			$syarat[8] === 'Lengkap' && 
-			$syarat[9] === 'Lengkap'
-			) 
-		{
+		if( $count==count($data)) {
+
 			$verifikasi->verifikasi = "Proses Visitasi";
-		} else {
-			$verifikasi->verifikasi = "Verifikasi Belum Lengkap";
-		}
-		}
-
-	
-		$verifikasi->save();
-		
-		if('Proses Visitasi'==$verifikasi->verifikasi) {
 
 		 	Mail::send('verifikasikliniks.email.messagesuccess',$syaratString, function($message) use($verifikasi){
        		 
@@ -162,6 +144,8 @@ class VerifikasikliniksController extends \BaseController {
 
 		} else {
 
+			$verifikasi->verifikasi = "Verifikasi Belum Lengkap";
+
 			Mail::send('verifikasikliniks.email.messagefailed', $syaratString, function($message) use($verifikasi){
        		 
        		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
@@ -169,6 +153,8 @@ class VerifikasikliniksController extends \BaseController {
    		 	});
 
 		}
+
+		$verifikasi->save();
 
 		return Redirect::route('admin.verifikasikliniks.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
 
