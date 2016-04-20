@@ -67,9 +67,9 @@ class VerifikasiklinikdialisesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$verifikasiklinikdialise = Pengguna::findOrFail($id);
+		$verifikasi = Pengguna::findOrFail($id);
 
-		return View::make('verifikasiklinikdialises.show', compact('verifikasiklinikdialise'));
+		return View::make('verifikasiklinikdialises.show', compact('verifikasi'));
 	}
 
 	/**
@@ -80,13 +80,13 @@ class VerifikasiklinikdialisesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$verifikasiklinikdialise = Pengguna::findOrFail($id);
+		$verifikasi = Pengguna::findOrFail($id);
 
 	    $data = Verifikasiklinikdialise::all();
 
 		// return View::make('devices', compact(['locations', 'devices']);
 
-		return View::make('verifikasiklinikdialises.edit', ['verifikasiklinikdialise'=>$verifikasiklinikdialise, 'data'=>$data])->withTitle("Verifikasi $verifikasiklinikdialise->nama");
+		return View::make('verifikasiklinikdialises.edit', ['verifikasi'=>$verifikasi, 'data'=>$data])->withTitle("Verifikasi $verifikasi->nama");
 	}
 
 	/**
@@ -97,7 +97,7 @@ class VerifikasiklinikdialisesController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$verifikasiklinikdialise = Pengguna::findOrFail($id);
+		$verifikasi = Pengguna::findOrFail($id);
 
 		$validator = Validator::make($data = Input::all(), Pengguna::$verifikasirules);
 
@@ -121,7 +121,7 @@ class VerifikasiklinikdialisesController extends \BaseController {
 		}
 
 		$syaratString = array(
-		'nama'	   => $verifikasiklinikdialise->nama,
+		'nama'	   => $verifikasi->nama,
 		'data'	   => $data,
 		'syarat'   => $syarat
 		);
@@ -155,34 +155,34 @@ class VerifikasiklinikdialisesController extends \BaseController {
 			$syarat[24] === 'Lengkap'
 			) 
 		{
-			$verifikasiklinikdialise->verifikasi = "Proses Visitasi";
+			$verifikasi->verifikasi = "Proses Visitasi";
 		} else {
-			$verifikasiklinikdialise->verifikasi = "Verifikasi Belum Lengkap";
+			$verifikasi->verifikasi = "Verifikasi Belum Lengkap";
 		}
 		}
 
 	
-		$verifikasiklinikdialise->save();
+		$verifikasi->save();
 		
-		if('Proses Visitasi'==$verifikasiklinikdialise->verifikasi) {
+		if('Proses Visitasi'==$verifikasi->verifikasi) {
 
-		 	Mail::send('verifikasiklinikdialises.email.messagesuccess',$syaratString, function($message) use($verifikasiklinikdialise){
+		 	Mail::send('verifikasiklinikdialises.email.messagesuccess',$syaratString, function($message) use($verifikasi){
        		 
-       		$message->to($verifikasiklinikdialise->email,$verifikasiklinikdialise->nama)->subject('Verifikasi Sistem Informasi Perizinan');
+       		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
    		 	});
 
 		} else {
 
-			Mail::send('verifikasiklinikdialises.email.messagefailed', $syaratString, function($message) use($verifikasiklinikdialise){
+			Mail::send('verifikasiklinikdialises.email.messagefailed', $syaratString, function($message) use($verifikasi){
        		 
-       		$message->to($verifikasiklinikdialise->email,$verifikasiklinikdialise->nama)->subject('Verifikasi Sistem Informasi Perizinan');
+       		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
    		 	});
 
 		}
 
-		return Redirect::route('admin.verifikasiklinikdialises.index')->with("successMessage", "Berhasil menyimpan $verifikasiklinikdialise->verifikasi" );
+		return Redirect::route('admin.verifikasiklinikdialises.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
 	}
 
 	/**
@@ -227,16 +227,16 @@ class VerifikasiklinikdialisesController extends \BaseController {
         }
 
         //$verifikasiapoteks = Pengguna::whereIn('perijinan_id', Input::get('perijinan_id'))->get();
-        $verifikasiklinikdialises = Pengguna::where('perijinan_id', '5')->whereIn('verifikasi',Input::get('verifikasi'))->get();
+        $verifikasi = Pengguna::where('perijinan_id', '5')->whereIn('verifikasi',Input::get('verifikasi'))->get();
 
         $type = Input::get('type');
         switch ($type) {
             case 'xls':
-                return $this->exportExcel($verifikasiklinikdialises);
+                return $this->exportExcel($verifikasi);
                 break;
 
             case 'pdf':
-                return $this->exportPdf($verifikasiklinikdialises);
+                return $this->exportPdf($verifikasi);
                 break;
 
             default:
@@ -248,14 +248,14 @@ class VerifikasiklinikdialisesController extends \BaseController {
      * Download excel data buku
      * @return PHPExcel
      */
-    private function exportExcel($verifikasiklinikdialises)
+    private function exportExcel($verifikasi)
     {
-        Excel::create('Data Verifikasi Perijinan', function($excel) use ($verifikasiklinikdialises) {
+        Excel::create('Data Verifikasi Perijinan', function($excel) use ($verifikasi) {
             // Set the properties
             $excel->setTitle('Data Verifikasi Perijinan')
                   ->setCreator('Husin Nanda Perwira');
 
-            $excel->sheet('Data Verifikasi', function($sheet) use ($verifikasiklinikdialises) {
+            $excel->sheet('Data Verifikasi', function($sheet) use ($verifikasi) {
                 $row = 1;
                 $sheet->row($row, array(
                     'Nama',
@@ -278,27 +278,27 @@ class VerifikasiklinikdialisesController extends \BaseController {
                     'Email',  
                     'Tanggal Registrasi'           
                 ));
-                foreach ($verifikasiklinikdialises as $verifikasiklinikdialise) {
+                foreach ($verifikasi as $verifikasi) {
                    $sheet->row(++$row, array(
-                    $verifikasiklinikdialise->nama,
-                    $verifikasiklinikdialise->perijinan->nama,
-                    $verifikasiklinikdialise->lokasi,
-                    $verifikasiklinikdialise->verifikasi,
-                    $verifikasiklinikdialise->noktp,
-                    $verifikasiklinikdialise->berlaku,
-                    $verifikasiklinikdialise->tempatlahir,
-                    $verifikasiklinikdialise->tanggallahir,
-                    $verifikasiklinikdialise->jeniskelamin,
-                    $verifikasiklinikdialise->pekerjaan,
-                    $verifikasiklinikdialise->provinsi,
-                    $verifikasiklinikdialise->kabupaten,
-                    $verifikasiklinikdialise->kecamatan,
-                    $verifikasiklinikdialise->desa,
-                    $verifikasiklinikdialise->alamat,
-                    $verifikasiklinikdialise->kodepos,
-                    $verifikasiklinikdialise->nohp,
-                    $verifikasiklinikdialise->email,
-                    $verifikasiklinikdialise->created_at,
+                    $verifikasi->nama,
+                    $verifikasi->perijinan->nama,
+                    $verifikasi->lokasi,
+                    $verifikasi->verifikasi,
+                    $verifikasi->noktp,
+                    $verifikasi->berlaku,
+                    $verifikasi->tempatlahir,
+                    $verifikasi->tanggallahir,
+                    $verifikasi->jeniskelamin,
+                    $verifikasi->pekerjaan,
+                    $verifikasi->provinsi,
+                    $verifikasi->kabupaten,
+                    $verifikasi->kecamatan,
+                    $verifikasi->desa,
+                    $verifikasi->alamat,
+                    $verifikasi->kodepos,
+                    $verifikasi->nohp,
+                    $verifikasi->email,
+                    $verifikasi->created_at,
                 ));
                 }
             });
@@ -309,9 +309,9 @@ class VerifikasiklinikdialisesController extends \BaseController {
      * Download pdf data buku
      * @return Dompdf
      */
-    private function exportPdf($verifikasiklinikdialises)
+    private function exportPdf($verifikasi)
     {
-        $data['verifikasiklinikdialises'] = $verifikasiklinikdialises;
+        $data['verifikasi'] = $verifikasi;
         $pdf = PDF::loadView('pdf.verifikasiklinikdialises', $data);
         return $pdf->download('verifikasiklinikdialises.pdf');
     }

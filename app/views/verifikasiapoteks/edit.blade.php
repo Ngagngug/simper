@@ -13,7 +13,7 @@
 
 @section('content')
                 
-     {{ Form::model($verifikasiapotek, array('url' => route('admin.verifikasiapoteks.update', ['verifikasiapoteks'=>$verifikasiapotek->id]), 'method' => 'put', 'class'=>'box-body')) }}
+     {{ Form::model($verifikasi, array('url' => route('admin.verifikasiapoteks.update', ['verifikasi'=>$verifikasi->id]), 'method' => 'put', 'class'=>'box-body')) }}
         @include('verifikasiapoteks._formedit')
     {{ Form::close() }}
 

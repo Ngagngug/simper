@@ -28,14 +28,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($verifikasiapoteks as $verifikasiapotek)
+            @foreach ($verifikasi as $verifikasi)
             <tr>
-                <td class="tg-rv4w">{{ $verifikasiapotek->nama }}</td>
-                <td class="tg-rv4w">{{ $verifikasiapotek->perijinan->nama }}</td>
-                <td class="tg-rv4w">{{ $verifikasiapotek->lokasi }}</td>
-                <td class="tg-rv4w">{{ $verifikasiapotek->verifikasi }}</td>
-                <td class="tg-rv4w">{{ $verifikasiapotek->email }}</td>
-                <td class="tg-rv4w">{{ $verifikasiapotek->created_at }}</td>          
+                <td class="tg-rv4w">{{ $verifikasi->nama }}</td>
+                <td class="tg-rv4w">{{ $verifikasi->perijinan->nama }}</td>
+                <td class="tg-rv4w">{{ $verifikasi->lokasi }}</td>
+                <td class="tg-rv4w">{{ $verifikasi->verifikasi }}</td>
+                <td class="tg-rv4w">{{ $verifikasi->email }}</td>
+                <td class="tg-rv4w">{{ $verifikasi->created_at }}</td>          
             </tr>
             @endforeach
         </tbody>

@@ -13,7 +13,7 @@
 
 @section('content')
                 
-     {{ Form::model($verifikasiklinikdialise, array('url' => route('admin.verifikasiklinikdialises.update', ['verifikasiklinikdialises'=>$verifikasiklinikdialise->id]), 'method' => 'put', 'class'=>'box-body')) }}
+     {{ Form::model($verifikasi, array('url' => route('admin.verifikasiklinikdialises.update', ['verifikasi'=>$verifikasi->id]), 'method' => 'put', 'class'=>'box-body')) }}
         @include('verifikasiklinikdialises._formedit')
     {{ Form::close() }}
 

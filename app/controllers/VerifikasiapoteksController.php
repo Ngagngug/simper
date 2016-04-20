@@ -69,9 +69,9 @@ class VerifikasiapoteksController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$verifikasiapotek = Pengguna::findOrFail($id);
+		$verifikasi = Pengguna::findOrFail($id);
 
-		return View::make('verifikasiapoteks.show', compact('verifikasiapotek'));
+		return View::make('verifikasiapoteks.show', compact('verifikasi'));
 	}
 
 	/**
@@ -83,13 +83,13 @@ class VerifikasiapoteksController extends \BaseController {
 	public function edit($id)
 	{
 
-	    $verifikasiapotek = Pengguna::findOrFail($id);
+	    $verifikasi = Pengguna::findOrFail($id);
 
 	    $data = Verifikasiapotek::all();
 
 		// return View::make('devices', compact(['locations', 'devices']);
 
-		return View::make('verifikasiapoteks.edit', ['verifikasiapotek'=>$verifikasiapotek, 'data'=>$data])->withTitle("Verifikasi $verifikasiapotek->nama");
+		return View::make('verifikasiapoteks.edit', ['verifikasi'=>$verifikasi, 'data'=>$data])->withTitle("Verifikasi $verifikasi->nama");
 	}
 
 	/**
@@ -100,7 +100,7 @@ class VerifikasiapoteksController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$verifikasiapotek = Pengguna::findOrFail($id);
+		$verifikasi = Pengguna::findOrFail($id);
 
 		$validator = Validator::make($data = Input::all(), Pengguna::$verifikasirules);
 
@@ -128,7 +128,7 @@ class VerifikasiapoteksController extends \BaseController {
 		}
 
 		$syaratString = array(
-		'nama'	   => $verifikasiapotek->nama,
+		'nama'	   => $verifikasi->nama,
 		'data'	   => $data,
 		'syarat'   => $syarat
 		);
@@ -159,35 +159,35 @@ class VerifikasiapoteksController extends \BaseController {
 			$syarat[22] === 'Lengkap' 
 			) 
 		{
-			$verifikasiapotek->verifikasi = "Proses Visitasi";
+			$verifikasi->verifikasi = "Proses Visitasi";
 		} else {
-			$verifikasiapotek->verifikasi = "Verifikasi Belum Lengkap";
+			$verifikasi->verifikasi = "Verifikasi Belum Lengkap";
 		}
 		
 		}
 
 		
-		$verifikasiapotek->save();
+		$verifikasi->save();
 		
-		if('Proses Visitasi'==$verifikasiapotek->verifikasi) {
+		if('Proses Visitasi'==$verifikasi->verifikasi) {
 
-		 	Mail::send('verifikasiapoteks.email.messagesuccess',$syaratString, function($message) use($verifikasiapotek){
+		 	Mail::send('verifikasiapoteks.email.messagesuccess',$syaratString, function($message) use($verifikasi){
        		 
-       		$message->to($verifikasiapotek->email,$verifikasiapotek->nama)->subject('Verifikasi Sistem Informasi Perizinan');
+       		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
    		 	});
 
 		} else {
 
-			Mail::send('verifikasiapoteks.email.messagefailed', $syaratString, function($message) use($verifikasiapotek){
+			Mail::send('verifikasiapoteks.email.messagefailed', $syaratString, function($message) use($verifikasi){
        		 
-       		$message->to($verifikasiapotek->email,$verifikasiapotek->nama)->subject('Verifikasi Sistem Informasi Perizinan');
+       		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
    		 	});
 
 		}
 
-		return Redirect::route('admin.verifikasiapoteks.index')->with("successMessage", "Berhasil menyimpan $verifikasiapotek->verifikasi" );
+		return Redirect::route('admin.verifikasiapoteks.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
 	}
 
 	/**
@@ -243,16 +243,16 @@ class VerifikasiapoteksController extends \BaseController {
         }
 
         //$verifikasiapoteks = Pengguna::whereIn('perijinan_id', Input::get('perijinan_id'))->get();
-        $verifikasiapoteks = Pengguna::where('perijinan_id', '1')->whereIn('verifikasi',Input::get('verifikasi'))->get();
+        $verifikasi = Pengguna::where('perijinan_id', '1')->whereIn('verifikasi',Input::get('verifikasi'))->get();
 
         $type = Input::get('type');
         switch ($type) {
             case 'xls':
-                return $this->exportExcel($verifikasiapoteks);
+                return $this->exportExcel($verifikasi);
                 break;
 
             case 'pdf':
-                return $this->exportPdf($verifikasiapoteks);
+                return $this->exportPdf($verifikasi);
                 break;
 
             default:
@@ -264,14 +264,14 @@ class VerifikasiapoteksController extends \BaseController {
      * Download excel data buku
      * @return PHPExcel
      */
-    private function exportExcel($verifikasiapoteks)
+    private function exportExcel($verifikasi)
     {
-        Excel::create('Data Verifikasi Perijinan', function($excel) use ($verifikasiapoteks) {
+        Excel::create('Data Verifikasi Perijinan', function($excel) use ($verifikasi) {
             // Set the properties
             $excel->setTitle('Data Verifikasi Perijinan')
                   ->setCreator('Husin Nanda Perwira');
 
-            $excel->sheet('Data Verifikasi', function($sheet) use ($verifikasiapoteks) {
+            $excel->sheet('Data Verifikasi', function($sheet) use ($verifikasi) {
                 $row = 1;
                 $sheet->row($row, array(
                     'Nama',
@@ -294,27 +294,27 @@ class VerifikasiapoteksController extends \BaseController {
                     'Email',  
                     'Tanggal Registrasi'           
                 ));
-                foreach ($verifikasiapoteks as $verifikasiapotek) {
+                foreach ($verifikasi as $verifikasi) {
                    $sheet->row(++$row, array(
-                    $verifikasiapotek->nama,
-                    $verifikasiapotek->perijinan->nama,
-                    $verifikasiapotek->lokasi,
-                    $verifikasiapotek->verifikasi,
-                    $verifikasiapotek->noktp,
-                    $verifikasiapotek->berlaku,
-                    $verifikasiapotek->tempatlahir,
-                    $verifikasiapotek->tanggallahir,
-                    $verifikasiapotek->jeniskelamin,
-                    $verifikasiapotek->pekerjaan,
-                    $verifikasiapotek->provinsi,
-                    $verifikasiapotek->kabupaten,
-                    $verifikasiapotek->kecamatan,
-                    $verifikasiapotek->desa,
-                    $verifikasiapotek->alamat,
-                    $verifikasiapotek->kodepos,
-                    $verifikasiapotek->nohp,
-                    $verifikasiapotek->email,
-                    $verifikasiapotek->created_at,
+                    $verifikasi->nama,
+                    $verifikasi->perijinan->nama,
+                    $verifikasi->lokasi,
+                    $verifikasi->verifikasi,
+                    $verifikasi->noktp,
+                    $verifikasi->berlaku,
+                    $verifikasi->tempatlahir,
+                    $verifikasi->tanggallahir,
+                    $verifikasi->jeniskelamin,
+                    $verifikasi->pekerjaan,
+                    $verifikasi->provinsi,
+                    $verifikasi->kabupaten,
+                    $verifikasi->kecamatan,
+                    $verifikasi->desa,
+                    $verifikasi->alamat,
+                    $verifikasi->kodepos,
+                    $verifikasi->nohp,
+                    $verifikasi->email,
+                    $verifikasi->created_at,
                 ));
                 }
             });
@@ -325,9 +325,9 @@ class VerifikasiapoteksController extends \BaseController {
      * Download pdf data buku
      * @return Dompdf
      */
-    private function exportPdf($verifikasiapoteks)
+    private function exportPdf($verifikasi)
     {
-        $data['verifikasiapoteks'] = $verifikasiapoteks;
+        $data['verifikasi'] = $verifikasi;
         $pdf = PDF::loadView('pdf.verifikasiapoteks', $data);
         return $pdf->download('verifikasiapoteks.pdf');
     }

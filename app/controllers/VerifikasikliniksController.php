@@ -69,9 +69,9 @@ class VerifikasikliniksController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$verifikasiklinik = Pengguna::findOrFail($id);
+		$verifikasi = Pengguna::findOrFail($id);
 
-		return View::make('verifikasikliniks.show', compact('verifikasiklinik'));
+		return View::make('verifikasikliniks.show', compact('verifikasi'));
 	}
 
 	/**
@@ -82,13 +82,13 @@ class VerifikasikliniksController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$verifikasiklinik = Pengguna::findOrFail($id);
+		$verifikasi = Pengguna::findOrFail($id);
 
 	    $data = Verifikasiklinik::all();
 
 		// return View::make('devices', compact(['locations', 'devices']);
 
-		return View::make('verifikasikliniks.edit', ['verifikasiklinik'=>$verifikasiklinik, 'data'=>$data])->withTitle("Verifikasi $verifikasiklinik->nama");
+		return View::make('verifikasikliniks.edit', ['verifikasi'=>$verifikasi, 'data'=>$data])->withTitle("Verifikasi $verifikasi->nama");
 
 	}
 
@@ -100,7 +100,7 @@ class VerifikasikliniksController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$verifikasiklinik = Pengguna::findOrFail($id);
+		$verifikasi = Pengguna::findOrFail($id);
 
 		$validator = Validator::make($data = Input::all(), Pengguna::$verifikasirules);
 
@@ -124,7 +124,7 @@ class VerifikasikliniksController extends \BaseController {
 		}
 
 		$syaratString = array(
-		'nama'	   => $verifikasiklinik->nama,
+		'nama'	   => $verifikasi->nama,
 		'data'	   => $data,
 		'syarat'   => $syarat
 		);
@@ -143,34 +143,34 @@ class VerifikasikliniksController extends \BaseController {
 			$syarat[9] === 'Lengkap'
 			) 
 		{
-			$verifikasiklinik->verifikasi = "Proses Visitasi";
+			$verifikasi->verifikasi = "Proses Visitasi";
 		} else {
-			$verifikasiklinik->verifikasi = "Verifikasi Belum Lengkap";
+			$verifikasi->verifikasi = "Verifikasi Belum Lengkap";
 		}
 		}
 
 	
-		$verifikasiklinik->save();
+		$verifikasi->save();
 		
-		if('Proses Visitasi'==$verifikasiklinik->verifikasi) {
+		if('Proses Visitasi'==$verifikasi->verifikasi) {
 
-		 	Mail::send('verifikasikliniks.email.messagesuccess',$syaratString, function($message) use($verifikasiklinik){
+		 	Mail::send('verifikasikliniks.email.messagesuccess',$syaratString, function($message) use($verifikasi){
        		 
-       		$message->to($verifikasiklinik->email,$verifikasiklinik->nama)->subject('Verifikasi Sistem Informasi Perizinan');
+       		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
    		 	});
 
 		} else {
 
-			Mail::send('verifikasikliniks.email.messagefailed', $syaratString, function($message) use($verifikasiklinik){
+			Mail::send('verifikasikliniks.email.messagefailed', $syaratString, function($message) use($verifikasi){
        		 
-       		$message->to($verifikasiklinik->email,$verifikasiklinik->nama)->subject('Verifikasi Sistem Informasi Perizinan');
+       		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
    		 	});
 
 		}
 
-		return Redirect::route('admin.verifikasikliniks.index')->with("successMessage", "Berhasil menyimpan $verifikasiklinik->verifikasi" );
+		return Redirect::route('admin.verifikasikliniks.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
 
 	}
 
@@ -217,16 +217,16 @@ class VerifikasikliniksController extends \BaseController {
         }
 
         //$verifikasiapoteks = Pengguna::whereIn('perijinan_id', Input::get('perijinan_id'))->get();
-        $verifikasikliniks = Pengguna::where('perijinan_id', '4')->whereIn('verifikasi',Input::get('verifikasi'))->get();
+        $verifikasi = Pengguna::where('perijinan_id', '4')->whereIn('verifikasi',Input::get('verifikasi'))->get();
 
         $type = Input::get('type');
         switch ($type) {
             case 'xls':
-                return $this->exportExcel($verifikasikliniks);
+                return $this->exportExcel($verifikasi);
                 break;
 
             case 'pdf':
-                return $this->exportPdf($verifikasikliniks);
+                return $this->exportPdf($verifikasi);
                 break;
 
             default:
@@ -238,14 +238,14 @@ class VerifikasikliniksController extends \BaseController {
      * Download excel data buku
      * @return PHPExcel
      */
-    private function exportExcel($verifikasikliniks)
+    private function exportExcel($verifikasi)
     {
-        Excel::create('Data Verifikasi Perijinan', function($excel) use ($verifikasikliniks) {
+        Excel::create('Data Verifikasi Perijinan', function($excel) use ($verifikasi) {
             // Set the properties
             $excel->setTitle('Data Verifikasi Perijinan')
                   ->setCreator('Husin Nanda Perwira');
 
-            $excel->sheet('Data Verifikasi', function($sheet) use ($verifikasikliniks) {
+            $excel->sheet('Data Verifikasi', function($sheet) use ($verifikasi) {
                 $row = 1;
                 $sheet->row($row, array(
                     'Nama',
@@ -268,27 +268,27 @@ class VerifikasikliniksController extends \BaseController {
                     'Email',  
                     'Tanggal Registrasi'           
                 ));
-                foreach ($verifikasikliniks as $verifikasiklinik) {
+                foreach ($verifikasi as $verifikasi) {
                    $sheet->row(++$row, array(
-                    $verifikasiklinik->nama,
-                    $verifikasiklinik->perijinan->nama,
-                    $verifikasiklinik->lokasi,
-                    $verifikasiklinik->verifikasi,
-                    $verifikasiklinik->noktp,
-                    $verifikasiklinik->berlaku,
-                    $verifikasiklinik->tempatlahir,
-                    $verifikasiklinik->tanggallahir,
-                    $verifikasiklinik->jeniskelamin,
-                    $verifikasiklinik->pekerjaan,
-                    $verifikasiklinik->provinsi,
-                    $verifikasiklinik->kabupaten,
-                    $verifikasiklinik->kecamatan,
-                    $verifikasiklinik->desa,
-                    $verifikasiklinik->alamat,
-                    $verifikasiklinik->kodepos,
-                    $verifikasiklinik->nohp,
-                    $verifikasiklinik->email,
-                    $verifikasiklinik->created_at,
+                    $verifikasi->nama,
+                    $verifikasi->perijinan->nama,
+                    $verifikasi->lokasi,
+                    $verifikasi->verifikasi,
+                    $verifikasi->noktp,
+                    $verifikasi->berlaku,
+                    $verifikasi->tempatlahir,
+                    $verifikasi->tanggallahir,
+                    $verifikasi->jeniskelamin,
+                    $verifikasi->pekerjaan,
+                    $verifikasi->provinsi,
+                    $verifikasi->kabupaten,
+                    $verifikasi->kecamatan,
+                    $verifikasi->desa,
+                    $verifikasi->alamat,
+                    $verifikasi->kodepos,
+                    $verifikasi->nohp,
+                    $verifikasi->email,
+                    $verifikasi->created_at,
                 ));
                 }
             });
@@ -299,9 +299,9 @@ class VerifikasikliniksController extends \BaseController {
      * Download pdf data buku
      * @return Dompdf
      */
-    private function exportPdf($verifikasikliniks)
+    private function exportPdf($verifikasi)
     {
-        $data['verifikasikliniks'] = $verifikasikliniks;
+        $data['verifikasi'] = $verifikasi;
         $pdf = PDF::loadView('pdf.verifikasikliniks', $data);
         return $pdf->download('verifikasikliniks.pdf');
     }
