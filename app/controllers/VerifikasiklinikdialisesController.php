@@ -9,12 +9,14 @@ class VerifikasiklinikdialisesController extends \BaseController {
 	 */
 	public function index()
 	{
+		$matchThese = ['perijinan_id' => '5','verifikasi' => 'Proses Verifikasi'];
+		$orThose = ['perijinan_id' => '5','verifikasi' => 'Verifikasi Belum Lengkap'];
 		if(Datatable::shouldHandle())
 	    {
 	    //    return Datatable::collection(Verifikasiapotek::all(array('id','nama', 'verifikasi')))
 	    //   return Datatable::collection(Pengguna::where('perijinan_id','=','5')->where('verifikasi','=','Proses Verifikasi')->orWhere('verifikasi','=','Verifikasi Belum Lengkap')->get())
-	    //	 return Datatable::collection(Visitasiapotek::where($matchThese)->get())
-	         return Datatable::collection(Pengguna::where('perijinan_id','5')->get())
+	    	 return Datatable::collection(Pengguna::where($matchThese)->orwhere($orThose)->get())
+	     //    return Datatable::collection(Pengguna::where('perijinan_id','5')->get())
 	            ->showColumns('id','nama', 'verifikasi', 'updated_at')
 	            ->addColumn('', function ($model) {
                     $html = '<center> <a href="'.route('admin.verifikasiklinikdialises.edit', ['verifikasiklinikdialises'=>$model->id]).'" class="btn btn-sm btn-default">Verifikasi</a> ';

@@ -9,13 +9,15 @@ class VerifikasikliniksController extends \BaseController {
 	 */
 	public function index()
 	{
-		//$matchThese = ['perijinan_id' => '1', 'verifikasi' => 'Proses Verifikasi'];
+		$matchThese = ['perijinan_id' => '4','verifikasi' => 'Proses Verifikasi'];
+		$orThose = ['perijinan_id' => '4','verifikasi' => 'Verifikasi Belum Lengkap'];
 		if(Datatable::shouldHandle())
 	    {
 	    //    return Datatable::collection(Verifikasiapotek::all(array('id','nama', 'verifikasi')))
-	    //    return Datatable::collection(Pengguna::where('perijinan_id','=','4')->where('verifikasi','=','Proses Verifikasi')->orWhere('verifikasi','=','Verifikasi Belum Lengkap')->get())
-	    //	 return Datatable::collection(Visitasiapotek::where($matchThese)->get())
-	          return Datatable::collection(Pengguna::where('perijinan_id','4')->get())
+	     //   return Datatable::collection(Pengguna::where('perijinan_id','=','4')->where('verifikasi','=','Proses Verifikasi')->orWhere('verifikasi','=','Verifikasi Belum Lengkap')->get())
+	    //	 return Datatable::collection(Pengguna::where($matchThese)->get())
+	    //      return Datatable::collection(Pengguna::where('perijinan_id','4')->get())
+	           return Datatable::collection(Pengguna::where($matchThese)->orwhere($orThose)->get())
 	            ->showColumns('id','nama', 'verifikasi', 'updated_at')
 	            ->addColumn('', function ($model) {
                     $html = '<center> <a href="'.route('admin.verifikasikliniks.edit', ['verifikasikliniks'=>$model->id]).'" class="btn btn-sm btn-default">Verifikasi</a> ';
