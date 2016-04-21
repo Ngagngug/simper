@@ -7,7 +7,7 @@
 @section('breadcrumb')
  <ol class="breadcrumb">
     <li><a href="/">Dashboard</a></li>
-    <li><a href="{{ route('admin.verifikasiklinikkecantikans.index') }}">Verifikasi Klinik</a></li>
+    <li><a href="{{ route('admin.verifikasiklinikkecantikans.index') }}">Verifikasi Klinik Kecantikan</a></li>
     <li class="active">{{ $title }}</li>
  </ol>
 @stop
@@ -18,15 +18,6 @@
   <h3 class="box-title">Silahkan Pilih Data :</h3>
   </div><!-- /.box-header -->
     {{ Form::open(array('url' => route('admin.verifikasiklinikkecantikans.exportpost'), 'method' => 'post', 'class'=>'box-body')) }}
-       {{--  <div class="form-group">
-            {{ Form::labelUI('perijinan_id', 'Pilih Kategori Perijinan') }}
-            {{ Form::select('perijinan_id[]', []+Perijinan::lists('nama','id'), null, array(
-                    'multiple',
-                    'id'=>'perijinan_id',
-                    'placeholder' => "Pilih Kategori Perijinan",
-                    'class' => "form-control select2")) }}
-        </div> --}}
-
          <div class="form-group">
             <label>Pilih Status Verifikasi</label>          
             <select name="verifikasi[]" class="form-control select2" multiple="multiple" data-placeholder="Pilih Status Verifikasi" style="width: 100%;">

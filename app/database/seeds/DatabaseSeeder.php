@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder {
 
 		// $this->call('UserTableSeeder');
 		$this->call('SentrySeeder');
-		$this->call('AuthorsTableSeeder');
 		$this->call('PerijinansTableSeeder');
 		$this->call('PenggunasTableSeeder');
 		$this->call('VerifikasiapoteksTableSeeder');
 		$this->call('VerifikasikliniksTableSeeder');
 		$this->call('VerifikasiklinikdialisisTableSeeder');
 		$this->call('VerifikasiklinikkecantikansTableSeeder');
+		$this->call('VerifikasilabklinikumumsTableSeeder');
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
 

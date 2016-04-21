@@ -1,27 +1,23 @@
 <?php
 
-class VerifikasikliniksController extends \BaseController {
+class VerifikasilabklinikumumsController extends \BaseController {
 
 	/**
-	 * Display a listing of verifikasikliniks
+	 * Display a listing of verifikasilabklinikumums
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$matchThese = ['perijinan_id' => '4','verifikasi' => 'Proses Verifikasi'];
-		$orThose = ['perijinan_id' => '4','verifikasi' => 'Verifikasi Belum Lengkap'];
+		$matchThese = ['perijinan_id' => '7','verifikasi' => 'Proses Verifikasi'];
+		$orThose = ['perijinan_id' => '7','verifikasi' => 'Verifikasi Belum Lengkap'];
 		if(Datatable::shouldHandle())
 	    {
-	    //    return Datatable::collection(Verifikasiapotek::all(array('id','nama', 'verifikasi')))
-	     //   return Datatable::collection(Pengguna::where('perijinan_id','=','4')->where('verifikasi','=','Proses Verifikasi')->orWhere('verifikasi','=','Verifikasi Belum Lengkap')->get())
-	    //	 return Datatable::collection(Pengguna::where($matchThese)->get())
-	    //      return Datatable::collection(Pengguna::where('perijinan_id','4')->get())
 	           return Datatable::collection(Pengguna::where($matchThese)->orwhere($orThose)->get())
 	            ->showColumns('id','nama', 'verifikasi', 'updated_at')
 	            ->addColumn('', function ($model) {
-                    $html = '<center> <a href="'.route('admin.verifikasikliniks.edit', ['verifikasikliniks'=>$model->id]).'" class="btn btn-sm btn-default">Verifikasi</a> ';
-					$html .= Form::open(array('url' => route('admin.verifikasikliniks.destroy', ['verifikasikliniks'=>$model->id]), 'method'=>'delete', 'class'=>'inline js-confirm'));
+                    $html = '<center> <a href="'.route('admin.verifikasilabklinikumums.edit', ['verifikasilabklinikumums'=>$model->id]).'" class="btn btn-sm btn-default">Verifikasi</a> ';
+					$html .= Form::open(array('url' => route('admin.verifikasilabklinikumums.destroy', ['verifikasilabklinikumums'=>$model->id]), 'method'=>'delete', 'class'=>'inline js-confirm'));
 					$html .= Form::submit('delete', array('class' => 'btn btn-sm btn-danger'));
 					$html .= Form::close();
 					return $html;
@@ -30,21 +26,21 @@ class VerifikasikliniksController extends \BaseController {
 	            ->orderColumns('nama', 'verifikasi', 'updated_at')
 	            ->make();
 	    }
-		return View::make('verifikasikliniks.index')->withTitle('Verifikasi Klinik');
+		return View::make('verifikasilabklinikumums.index')->withTitle('Verifikasi Lab Klinik Umum Pratama');
 	}
 
 	/**
-	 * Show the form for creating a new verifikasiklinik
+	 * Show the form for creating a new verifikasilabklinikumum
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		return View::make('verifikasikliniks.create')->withTitle('Tambah Verifikasi');
+		return View::make('verifikasilabklinikumums.create')->withTitle('Tambah Verifikasi');
 	}
 
 	/**
-	 * Store a newly created verifikasiklinik in storage.
+	 * Store a newly created verifikasilabklinikumum in storage.
 	 *
 	 * @return Response
 	 */
@@ -59,12 +55,12 @@ class VerifikasikliniksController extends \BaseController {
 
 		$verifikasi = Pengguna::create($data);
 
-		return Redirect::route('admin.verifikasikliniks.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi ");
+		return Redirect::route('admin.verifikasilabklinikumums.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi ");
 
 	}
 
 	/**
-	 * Display the specified verifikasiklinik.
+	 * Display the specified verifikasilabklinikumum.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -73,11 +69,11 @@ class VerifikasikliniksController extends \BaseController {
 	{
 		$verifikasi = Pengguna::findOrFail($id);
 
-		return View::make('verifikasikliniks.show', compact('verifikasi'));
+		return View::make('verifikasilabklinikumums.show', compact('verifikasi'));
 	}
 
 	/**
-	 * Show the form for editing the specified verifikasiklinik.
+	 * Show the form for editing the specified verifikasilabklinikumum.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -86,16 +82,17 @@ class VerifikasikliniksController extends \BaseController {
 	{
 		$verifikasi = Pengguna::findOrFail($id);
 
-	    $data = Verifikasiklinik::all();
+	    $data = Verifikasilabklinikumum::all();
 
 		// return View::make('devices', compact(['locations', 'devices']);
 
-		return View::make('verifikasikliniks.edit', ['verifikasi'=>$verifikasi, 'data'=>$data])->withTitle("Verifikasi $verifikasi->nama");
+		return View::make('verifikasilabklinikumums.edit', ['verifikasi'=>$verifikasi, 'data'=>$data])->withTitle("Verifikasi $verifikasi->nama");
+
 
 	}
 
 	/**
-	 * Update the specified verifikasiklinik in storage.
+	 * Update the specified verifikasilabklinikumum in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -111,7 +108,7 @@ class VerifikasikliniksController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		$data = Verifikasiklinik::all();
+		$data = Verifikasilabklinikumum::all();
 
 		$count = 0;
 
@@ -158,35 +155,35 @@ class VerifikasikliniksController extends \BaseController {
 
 		$verifikasi->save();
 
-		return Redirect::route('admin.verifikasikliniks.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
+		return Redirect::route('admin.verifikasilabklinikumums.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
 
 	}
 
 	/**
-	 * Remove the specified verifikasiklinik from storage.
+	 * Remove the specified verifikasilabklinikumum from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-	    // mengecek apakah author bisa dihapus
+		 // mengecek apakah author bisa dihapus
 		if (!Pengguna::destroy($id))
 		{
 			return Redirect::back();
 		}
 
-		return Redirect::route('admin.verifikasikliniks.index')->with('successMessage', 'User berhasil dihapus.');
+		return Redirect::route('admin.verifikasilabklinikumums.index')->with('successMessage', 'User berhasil dihapus.');
+
 	}
 
-
-	 /**
+	/**
      * Tampilkan halaman untuk export excel
      * @return response
      */
     public function export()
     {
-        return View::make('verifikasikliniks.export')->withTitle('Export Data');
+        return View::make('verifikasilabklinikumums.export')->withTitle('Export Data');
     }
 
     /**
@@ -205,7 +202,7 @@ class VerifikasikliniksController extends \BaseController {
         }
 
         //$verifikasiapoteks = Pengguna::whereIn('perijinan_id', Input::get('perijinan_id'))->get();
-        $verifikasi = Pengguna::where('perijinan_id', '4')->whereIn('verifikasi',Input::get('verifikasi'))->get();
+        $verifikasi = Pengguna::where('perijinan_id', '7')->whereIn('verifikasi',Input::get('verifikasi'))->get();
 
         $type = Input::get('type');
         switch ($type) {
@@ -291,7 +288,7 @@ class VerifikasikliniksController extends \BaseController {
     {
         $data['verifikasi'] = $verifikasi;
         $pdf = PDF::loadView('pdf.verifikasi', $data);
-        return $pdf->download('verifikasikliniks.pdf');
+        return $pdf->download('verifikasilabklinikumums.pdf');
     }
 
 }

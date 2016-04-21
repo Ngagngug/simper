@@ -48,7 +48,7 @@
                 <li><a href="{{ URL::to('admin/verifikasikliniks') }}"><i class="fa fa-circle-o"></i>Klinik</a></li>
                 <li><a href="{{ URL::to('admin/verifikasiklinikdialises') }}"><i class="fa fa-circle-o"></i>Klinik Dialisis</a></li>
                 <li><a href="{{ URL::to('admin/verifikasiklinikkecantikans') }}"><i class="fa fa-circle-o"></i>Klinik Kecantikan Estetika</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Laboratorium Klinik Umum P</a></li>
+                <li><a href="{{ URL::to('admin/verifikasilabklinikumums') }}"><i class="fa fa-circle-o"></i>Laboratorium Klinik Umum P</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>Laboratorium Optik</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>Optikal</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>Toko Obat</a></li>

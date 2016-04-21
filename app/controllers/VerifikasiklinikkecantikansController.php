@@ -146,7 +146,7 @@ class VerifikasiklinikkecantikansController extends \BaseController {
 
 			$verifikasi->verifikasi = "Proses Visitasi";
 
-		 	Mail::send('verifikasiklinikkecantikans.email.messagesuccess',$syaratString, function($message) use($verifikasi){
+		 	Mail::send('emails.verifikasi.messagesuccess',$syaratString, function($message) use($verifikasi){
        		 
        		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
@@ -156,7 +156,7 @@ class VerifikasiklinikkecantikansController extends \BaseController {
 
 			$verifikasi->verifikasi = "Verifikasi Belum Lengkap";
 
-			Mail::send('verifikasiklinikkecantikans.email.messagefailed', $syaratString, function($message) use($verifikasi){
+			Mail::send('emails.verifikasi.messagefailed', $syaratString, function($message) use($verifikasi){
        		 
        		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
@@ -297,7 +297,7 @@ class VerifikasiklinikkecantikansController extends \BaseController {
     private function exportPdf($verifikasi)
     {
         $data['verifikasi'] = $verifikasi;
-        $pdf = PDF::loadView('pdf.verifikasiklinikkecantikans', $data);
+        $pdf = PDF::loadView('pdf.verifikasi', $data);
         return $pdf->download('verifikasiklinikkecantikans.pdf');
     }
 

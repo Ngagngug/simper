@@ -13,7 +13,7 @@
 
 @section('content')
                 
-     {{ Form::model($verifikasi, array('url' => route('admin.verifikasiklinikdialises.update', ['verifikasi'=>$verifikasi->id]), 'method' => 'put', 'class'=>'box-body')) }}
+     {{ Form::model($verifikasi, array('url' => route('admin.verifikasilabklinikumums.update', ['verifikasi'=>$verifikasi->id]), 'method' => 'put', 'class'=>'box-body')) }}
         @include('cheklist._formverifikasi')
     {{ Form::close() }}
 

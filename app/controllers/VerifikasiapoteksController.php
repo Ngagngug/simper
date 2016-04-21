@@ -142,7 +142,7 @@ class VerifikasiapoteksController extends \BaseController {
 
 			$verifikasi->verifikasi = "Proses Visitasi";
 
-		 	Mail::send('verifikasiapoteks.email.messagesuccess',$syaratString, function($message) use($verifikasi){
+		 	Mail::send('emails.verifikasi.messagesuccess',$syaratString, function($message) use($verifikasi){
        		 
        		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
@@ -152,7 +152,7 @@ class VerifikasiapoteksController extends \BaseController {
 
 			$verifikasi->verifikasi = "Verifikasi Belum Lengkap";
 
-			Mail::send('verifikasiapoteks.email.messagefailed', $syaratString, function($message) use($verifikasi){
+			Mail::send('emails.verifikasi.messagefailed', $syaratString, function($message) use($verifikasi){
        		 
        		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
@@ -303,7 +303,7 @@ class VerifikasiapoteksController extends \BaseController {
     private function exportPdf($verifikasi)
     {
         $data['verifikasi'] = $verifikasi;
-        $pdf = PDF::loadView('pdf.verifikasiapoteks', $data);
+        $pdf = PDF::loadView('pdf.verifikasi', $data);
         return $pdf->download('verifikasiapoteks.pdf');
     }
 

@@ -42,7 +42,10 @@ Route::group(array('before' => 'auth'), function () {
 
     Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
     {
-    	Route::resource('authors', 'AuthorsController');
+        //Verifikasi
+        Route::get('penggunas/export', array('as'=>'admin.penggunas.export', 'uses'=>'PenggunasController@export'));
+        Route::post('penggunas/export-post', array('as'=>'admin.penggunas.exportpost', 'uses'=>'PenggunasController@exportPost'));
+        
         Route::get('verifikasiapoteks/export', array('as'=>'admin.verifikasiapoteks.export', 'uses'=>'VerifikasiapoteksController@export'));
         Route::post('verifikasiapoteks/export-post', array('as'=>'admin.verifikasiapoteks.exportpost', 'uses'=>'VerifikasiapoteksController@exportPost'));
     	
@@ -55,16 +58,25 @@ Route::group(array('before' => 'auth'), function () {
         Route::get('verifikasiklinikkecantikans/export', array('as'=>'admin.verifikasiklinikkecantikans.export', 'uses'=>'VerifikasiklinikkecantikansController@export'));
         Route::post('verifikasiklinikkecantikans/export-post', array('as'=>'admin.verifikasiklinikkecantikans.exportpost', 'uses'=>'VerifikasiklinikkecantikansController@exportPost'));
         
-        Route::get('penggunas/export', array('as'=>'admin.penggunas.export', 'uses'=>'PenggunasController@export'));
-        Route::post('penggunas/export-post', array('as'=>'admin.penggunas.exportpost', 'uses'=>'PenggunasController@exportPost'));
+        Route::get('verifikasiklinikkecantikans/export', array('as'=>'admin.verifikasiklinikkecantikans.export', 'uses'=>'VerifikasiklinikkecantikansController@export'));
+        Route::post('verifikasiklinikkecantikans/export-post', array('as'=>'admin.verifikasiklinikkecantikans.exportpost', 'uses'=>'VerifikasiklinikkecantikansController@exportPost'));
+       
+        Route::get('verifikasilabklinikumums/export', array('as'=>'admin.verifikasilabklinikumums.export', 'uses'=>'VerifikasilabklinikumumsController@export'));
+        Route::post('verifikasilabklinikumums/export-post', array('as'=>'admin.verifikasilabklinikumums.exportpost', 'uses'=>'VerifikasilabklinikumumsController@exportPost'));
+       
+        //Visitasi
         Route::get('visitasiapoteks/export', array('as'=>'admin.visitasiapoteks.export', 'uses'=>'VisitasiapoteksController@export'));
         Route::post('visitasiapoteks/export-post', array('as'=>'admin.visitasiapoteks.exportpost', 'uses'=>'VisitasiapoteksController@exportPost'));
+        
+        //Controller
         Route::resource('penggunas', 'PenggunasController');
     	Route::resource('perijinans', 'PerijinansController');
+
     	Route::resource('verifikasiapoteks', 'VerifikasiapoteksController');
         Route::resource('verifikasikliniks', 'VerifikasikliniksController');
         Route::resource('verifikasiklinikdialises', 'VerifikasiklinikdialisesController');
         Route::resource('verifikasiklinikkecantikans', 'VerifikasiklinikkecantikansController');
+        Route::resource('verifikasilabklinikumums', 'VerifikasilabklinikumumsController');
 
         Route::resource('visitasiapoteks', 'VisitasiapoteksController');
     });

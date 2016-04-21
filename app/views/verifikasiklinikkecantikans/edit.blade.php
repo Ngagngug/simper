@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
       <ol class="breadcrumb">
-    <li><a href="{{ route('admin.verifikasiklinikkecantikans.index') }}"><i class="fa fa-dashboard"></i> Verifikasi </a></li>
+    <li><i class="fa fa-dashboard"></i> Verifikasi</li>
             <li class="active">{{ $title }}</li>  
       </ol>
 @stop
@@ -14,7 +14,7 @@
 @section('content')
                 
      {{ Form::model($verifikasi, array('url' => route('admin.verifikasiklinikkecantikans.update', ['verifikasi'=>$verifikasi->id]), 'method' => 'put', 'class'=>'box-body')) }}
-        @include('verifikasiklinikkecantikans._formedit')
+        @include('cheklist._formverifikasi')
     {{ Form::close() }}
 
 @stop

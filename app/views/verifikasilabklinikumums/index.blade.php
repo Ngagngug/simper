@@ -4,34 +4,40 @@
     {{ $title }}
 @stop
 
-@section('title-button')
-    {{ HTML::buttonAdd() }}
-@stop
-
 @section('breadcrumb')
       <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard </a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> Verifikasi </a></li>
             <li class="active">{{ $title }}</li>
       </ol>
+@stop
+
+@section('title-button')
+    <a class="btn btn-block btn-primary" href="{{ route('admin.verifikasilabklinikumums.export') }}">Export</a>
 @stop
 
 @section('content')
 
    {{ Datatable::table()
-    ->addColumn('id','Nama', '')       // these are the column headings to be shown
+    ->addColumn('id','Nama' ,'Verifikasi', 'Tanggal Verifikasi', '')       // these are the column headings to be shown
     ->setOptions('aoColumnDefs',array(
         array(
             'bVisible' => false,
             'aTargets' => [0]),
-        array(
+          array(
             'sTitle' => 'Nama',
             'aTargets' => [1]),
         array(
+            'sTitle' => 'Verifikasi',
+            'aTargets' => [2]),
+         array(
+            'sTitle' => 'Tanggal Verifikasi',
+            'aTargets' => [3]),
+        array(
             'bSortable' => false,
-            'aTargets' => [2])
+            'aTargets' => [4])
         ))
     ->setOptions('bProcessing', true)
-    ->setUrl(route('admin.authors.index'))   // this is the route where data will be retrieved
+    ->setUrl(route('admin.verifikasilabklinikumums.index'))   // this is the route where data will be retrieved
     ->render('datatable.custom') }}
 
 @stop
