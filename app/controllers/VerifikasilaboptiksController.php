@@ -1,23 +1,23 @@
 <?php
 
-class VerifikasilabklinikumumsController extends \BaseController {
+class VerifikasilaboptiksController extends \BaseController {
 
 	/**
-	 * Display a listing of verifikasilabklinikumums
+	 * Display a listing of verifikasilaboptiks
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$matchThese = ['perijinan_id' => '7','verifikasi' => 'Proses Verifikasi'];
-		$orThose = ['perijinan_id' => '7','verifikasi' => 'Verifikasi Belum Lengkap'];
+		$matchThese = ['perijinan_id' => '8','verifikasi' => 'Proses Verifikasi'];
+		$orThose = ['perijinan_id' => '8','verifikasi' => 'Verifikasi Belum Lengkap'];
 		if(Datatable::shouldHandle())
 	    {
 	           return Datatable::collection(Pengguna::where($matchThese)->orwhere($orThose)->get())
 	            ->showColumns('id','nama', 'verifikasi', 'updated_at')
 	            ->addColumn('', function ($model) {
-                    $html = '<center> <a href="'.route('admin.verifikasilabklinikumums.edit', ['verifikasilabklinikumums'=>$model->id]).'" class="btn btn-sm btn-default">Verifikasi</a> ';
-					$html .= Form::open(array('url' => route('admin.verifikasilabklinikumums.destroy', ['verifikasilabklinikumums'=>$model->id]), 'method'=>'delete', 'class'=>'inline js-confirm'));
+                    $html = '<center> <a href="'.route('admin.verifikasilaboptiks.edit', ['verifikasilaboptiks'=>$model->id]).'" class="btn btn-sm btn-default">Verifikasi</a> ';
+					$html .= Form::open(array('url' => route('admin.verifikasilaboptiks.destroy', ['verifikasilaboptiks'=>$model->id]), 'method'=>'delete', 'class'=>'inline js-confirm'));
 					$html .= Form::submit('delete', array('class' => 'btn btn-sm btn-danger'));
 					$html .= Form::close();
 					return $html;
@@ -26,21 +26,23 @@ class VerifikasilabklinikumumsController extends \BaseController {
 	            ->orderColumns('nama', 'verifikasi', 'updated_at')
 	            ->make();
 	    }
-		return View::make('verifikasilabklinikumums.index')->withTitle('Verifikasi Lab Klinik Umum Pratama');
+		return View::make('verifikasilaboptiks.index')->withTitle('Verifikasi Lab Klinik Umum Pratama');
+	
 	}
 
 	/**
-	 * Show the form for creating a new verifikasilabklinikumum
+	 * Show the form for creating a new verifikasilaboptik
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		return View::make('verifikasilabklinikumums.create')->withTitle('Tambah Verifikasi');
+		return View::make('verifikasilaboptiks.create')->withTitle('Tambah Verifikasi');
+
 	}
 
 	/**
-	 * Store a newly created verifikasilabklinikumum in storage.
+	 * Store a newly created verifikasilaboptik in storage.
 	 *
 	 * @return Response
 	 */
@@ -55,25 +57,27 @@ class VerifikasilabklinikumumsController extends \BaseController {
 
 		$verifikasi = Pengguna::create($data);
 
-		return Redirect::route('admin.verifikasilabklinikumums.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi ");
+		return Redirect::route('admin.verifikasilaboptiks.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi ");
 
 	}
 
 	/**
-	 * Display the specified verifikasilabklinikumum.
+	 * Display the specified verifikasilaboptik.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function show($id)
 	{
+
 		$verifikasi = Pengguna::findOrFail($id);
 
-		return View::make('verifikasilabklinikumums.show', compact('verifikasi'));
+		return View::make('verifikasilaboptiks.show', compact('verifikasi'));
+
 	}
 
 	/**
-	 * Show the form for editing the specified verifikasilabklinikumum.
+	 * Show the form for editing the specified verifikasilaboptik.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -82,22 +86,23 @@ class VerifikasilabklinikumumsController extends \BaseController {
 	{
 		$verifikasi = Pengguna::findOrFail($id);
 
-	    $data = Verifikasilabklinikumum::all();
+	    $data = Verifikasilaboptik::all();
 
 		// return View::make('devices', compact(['locations', 'devices']);
 
-		return View::make('verifikasilabklinikumums.edit', ['verifikasi'=>$verifikasi, 'data'=>$data])->withTitle("Verifikasi $verifikasi->nama");
+		return View::make('verifikasilaboptiks.edit', ['verifikasi'=>$verifikasi, 'data'=>$data])->withTitle("Verifikasi $verifikasi->nama");
 
 	}
 
 	/**
-	 * Update the specified verifikasilabklinikumum in storage.
+	 * Update the specified verifikasilaboptik in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function update($id)
 	{
+
 		$verifikasi = Pengguna::findOrFail($id);
 
 		$validator = Validator::make($data = Input::all(), Pengguna::$verifikasirules);
@@ -107,7 +112,7 @@ class VerifikasilabklinikumumsController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		$data = Verifikasilabklinikumum::all();
+		$data = Verifikasilaboptik::all();
 
 		$count = 0;
 
@@ -154,12 +159,12 @@ class VerifikasilabklinikumumsController extends \BaseController {
 
 		$verifikasi->save();
 
-		return Redirect::route('admin.verifikasilabklinikumums.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
+		return Redirect::route('admin.verifikasilaboptiks.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
 
 	}
 
 	/**
-	 * Remove the specified verifikasilabklinikumum from storage.
+	 * Remove the specified verifikasilaboptik from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -172,8 +177,7 @@ class VerifikasilabklinikumumsController extends \BaseController {
 			return Redirect::back();
 		}
 
-		return Redirect::route('admin.verifikasilabklinikumums.index')->with('successMessage', 'User berhasil dihapus.');
-
+		return Redirect::route('admin.verifikasilaboptiks.index')->with('successMessage', 'User berhasil dihapus.');
 	}
 
 	/**
@@ -182,7 +186,7 @@ class VerifikasilabklinikumumsController extends \BaseController {
      */
     public function export()
     {
-        return View::make('verifikasilabklinikumums.export')->withTitle('Export Data');
+        return View::make('verifikasilaboptiks.export')->withTitle('Export Data');
     }
 
     /**
@@ -201,7 +205,7 @@ class VerifikasilabklinikumumsController extends \BaseController {
         }
 
         //$verifikasiapoteks = Pengguna::whereIn('perijinan_id', Input::get('perijinan_id'))->get();
-        $verifikasi = Pengguna::where('perijinan_id', '7')->whereIn('verifikasi',Input::get('verifikasi'))->get();
+        $verifikasi = Pengguna::where('perijinan_id', '8')->whereIn('verifikasi',Input::get('verifikasi'))->get();
 
         $type = Input::get('type');
         switch ($type) {
@@ -287,7 +291,7 @@ class VerifikasilabklinikumumsController extends \BaseController {
     {
         $data['verifikasi'] = $verifikasi;
         $pdf = PDF::loadView('pdf.verifikasi', $data);
-        return $pdf->download('verifikasilabklinikumums.pdf');
+        return $pdf->download('verifikasilaboptiks.pdf');
     }
 
 }
