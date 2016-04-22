@@ -52,9 +52,8 @@
                 <li><a href="{{ URL::to('admin/verifikasilaboptiks') }}"><i class="fa fa-circle-o"></i>Laboratorium Optik</a></li>
                 <li><a href="{{ URL::to('admin/verifikasioptikals') }}"><i class="fa fa-circle-o"></i>Optikal</a></li>
                 <li><a href="{{ URL::to('admin/verifikasitokoobats') }}"><i class="fa fa-circle-o"></i>Toko Obat</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Pedagang Eceran Obat</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Toko Alat Kesehatan</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Rumah Sakit</a></li>
+                <li><a href="{{ URL::to('admin/verifikasialatkesehatans') }}"><i class="fa fa-circle-o"></i>Toko Alat Kesehatan</a></li>
+                <li><a href="{{ URL::to('admin/verifikasirumahsakits') }}"><i class="fa fa-circle-o"></i>Rumah Sakit</a></li>
               </ul>
             </li>
              <li class="treeview">

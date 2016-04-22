@@ -76,6 +76,12 @@ Route::group(array('before' => 'auth'), function () {
         Route::get('verifikasiapotekrakyats/export', array('as'=>'admin.verifikasiapotekrakyats.export', 'uses'=>'VerifikasiapotekrakyatsController@export'));
         Route::post('verifikasiapotekrakyats/export-post', array('as'=>'admin.verifikasiapotekrakyats.exportpost', 'uses'=>'VerifikasiapotekrakyatsController@exportPost'));
 
+        Route::get('verifikasialatkesehatans/export', array('as'=>'admin.verifikasialatkesehatans.export', 'uses'=>'VerifikasialatkesehatansController@export'));
+        Route::post('verifikasialatkesehatans/export-post', array('as'=>'admin.verifikasialatkesehatans.exportpost', 'uses'=>'VerifikasialatkesehatansController@exportPost'));
+
+        Route::get('verifikasirumahsakits/export', array('as'=>'admin.verifikasirumahsakits.export', 'uses'=>'VerifikasirumahsakitsController@export'));
+        Route::post('verifikasirumahsakits/export-post', array('as'=>'admin.verifikasirumahsakits.exportpost', 'uses'=>'VerifikasirumahsakitsController@exportPost'));
+
         
         //Controller
         Route::resource('penggunas', 'PenggunasController');
@@ -90,10 +96,8 @@ Route::group(array('before' => 'auth'), function () {
         Route::resource('verifikasioptikals', 'VerifikasioptikalsController');
         Route::resource('verifikasitokoobats', 'VerifikasitokoobatsController');
         Route::resource('verifikasiapotekrakyats', 'VerifikasiapotekrakyatsController');
-
-
-
-
+        Route::resource('verifikasialatkesehatans', 'VerifikasialatkesehatansController');
+        Route::resource('verifikasirumahsakits', 'VerifikasirumahsakitsController');
 
         Route::resource('visitasiapoteks', 'VisitasiapoteksController');
 
