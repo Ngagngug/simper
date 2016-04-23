@@ -63,7 +63,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{ URL::to('admin/visitasiapoteks') }}"><i class="fa fa-circle-o"></i>Apotek</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Apotek Rakyat</a></li>
+                <li><a href="{{ URL::to('admin/visitasiapotekrakyats') }}"><i class="fa fa-circle-o"></i>Apotek Rakyat</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>Puskesmas</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>Klinik</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>Klinik Dialisis</a></li>

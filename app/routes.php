@@ -86,7 +86,9 @@ Route::group(array('before' => 'auth'), function () {
         Route::get('visitasiapoteks/export', array('as'=>'admin.visitasiapoteks.export', 'uses'=>'VisitasiapoteksController@export'));
         Route::post('visitasiapoteks/export-post', array('as'=>'admin.visitasiapoteks.exportpost', 'uses'=>'VisitasiapoteksController@exportPost'));
    
-        
+        Route::get('visitasiapotekrakyats/export', array('as'=>'admin.visitasiapotekrakyats.export', 'uses'=>'VisitasiapotekrakyatsController@export'));
+        Route::post('visitasiapotekrakyats/export-post', array('as'=>'admin.visitasiapotekrakyats.exportpost', 'uses'=>'VisitasiapotekrakyatsController@exportPost'));
+   
     //Controller
         Route::resource('penggunas', 'PenggunasController');
     	Route::resource('perijinans', 'PerijinansController');
@@ -107,6 +109,7 @@ Route::group(array('before' => 'auth'), function () {
 
   //Visitasi Controller
         Route::resource('visitasiapoteks', 'VisitasiapoteksController');
+        Route::resource('visitasiapotekrakyats', 'VisitasiapotekrakyatsController');
 
         
         
