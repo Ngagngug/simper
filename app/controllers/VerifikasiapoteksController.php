@@ -210,7 +210,7 @@ class VerifikasiapoteksController extends \BaseController {
     {
         // validasi
         $rules = ['verifikasi'=>'required', 'type'=>'required'];
-        $messages = ['verifikasi.required'=>'Anda belum memilih status visitasi. Pilih minimal 1 status.'];
+        $messages = ['verifikasi.required'=>'Anda belum memilih status verifikasi. Pilih minimal 1 status.'];
         $validator = Validator::make(Input::all(), $rules, $messages);
         if ($validator->fails())
         {

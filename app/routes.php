@@ -42,7 +42,7 @@ Route::group(array('before' => 'auth'), function () {
 
     Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
     {
-        //Verifikasi
+    //Verifikasi Controller
         Route::get('penggunas/export', array('as'=>'admin.penggunas.export', 'uses'=>'PenggunasController@export'));
         Route::post('penggunas/export-post', array('as'=>'admin.penggunas.exportpost', 'uses'=>'PenggunasController@exportPost'));
         
@@ -82,11 +82,16 @@ Route::group(array('before' => 'auth'), function () {
         Route::get('verifikasirumahsakits/export', array('as'=>'admin.verifikasirumahsakits.export', 'uses'=>'VerifikasirumahsakitsController@export'));
         Route::post('verifikasirumahsakits/export-post', array('as'=>'admin.verifikasirumahsakits.exportpost', 'uses'=>'VerifikasirumahsakitsController@exportPost'));
 
+    //Visitasi Controller
+        Route::get('visitasiapoteks/export', array('as'=>'admin.visitasiapoteks.export', 'uses'=>'VisitasiapoteksController@export'));
+        Route::post('visitasiapoteks/export-post', array('as'=>'admin.visitasiapoteks.exportpost', 'uses'=>'VisitasiapoteksController@exportPost'));
+   
         
-        //Controller
+    //Controller
         Route::resource('penggunas', 'PenggunasController');
     	Route::resource('perijinans', 'PerijinansController');
 
+    //Verifikasi Controller
     	Route::resource('verifikasiapoteks', 'VerifikasiapoteksController');
         Route::resource('verifikasikliniks', 'VerifikasikliniksController');
         Route::resource('verifikasiklinikdialises', 'VerifikasiklinikdialisesController');
@@ -99,12 +104,12 @@ Route::group(array('before' => 'auth'), function () {
         Route::resource('verifikasialatkesehatans', 'VerifikasialatkesehatansController');
         Route::resource('verifikasirumahsakits', 'VerifikasirumahsakitsController');
 
+
+  //Visitasi Controller
         Route::resource('visitasiapoteks', 'VisitasiapoteksController');
 
-          //Visitasi
-        Route::get('visitasiapoteks/export', array('as'=>'admin.visitasiapoteks.export', 'uses'=>'VisitasiapoteksController@export'));
-        Route::post('visitasiapoteks/export-post', array('as'=>'admin.visitasiapoteks.exportpost', 'uses'=>'VisitasiapoteksController@exportPost'));
-      
+        
+        
     });
 });
 

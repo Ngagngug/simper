@@ -6,15 +6,15 @@
 
 @section('breadcrumb')
       <ol class="breadcrumb">
-    <li><a href="{{ route('admin.visitasiapoteks.index') }}"><i class="fa fa-dashboard"></i> Visitasi </a></li>
+    <li><i class="fa fa-dashboard"></i> Verifikasi</li>
             <li class="active">{{ $title }}</li>  
       </ol>
 @stop
 
 @section('content')
                 
-     {{ Form::model($visitasiapotek, array('url' => route('admin.visitasiapoteks.update', ['visitasiapoteks'=>$visitasiapotek->id]), 'method' => 'put', 'class'=>'box-body')) }}
-        @include('visitasiapoteks._formedit')
+     {{ Form::model($verifikasi, array('url' => route('admin.visitasiapoteks.update', ['verifikasi'=>$verifikasi->id]), 'method' => 'put', 'class'=>'box-body')) }}
+        @include('cheklist._formverifikasi')
     {{ Form::close() }}
 
 @stop

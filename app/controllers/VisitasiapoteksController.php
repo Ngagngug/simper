@@ -9,26 +9,26 @@ class VisitasiapoteksController extends \BaseController {
 	 */
 	public function index()
 	{
-		//$verifikasiapoteks = Pengguna::whereIn('perijinan_id', Input::get('perijinan_id'))->get();
-
+		$matchThese = ['perijinan_id' => '1','verifikasi' => 'Visitasi Selesai'];
+		$orThose = ['perijinan_id' => '1','verifikasi' => 'Visitasi Gagal'];
+		$orThoses = ['perijinan_id' => '1','verifikasi' => 'Proses Visitasi'];
 		if(Datatable::shouldHandle())
 	    {
-	    //    return Datatable::collection(Visitasiapotek::all(array('id','nama', 'verifikasi')))
-	    //	    return Datatable::collection(Visitasiapotek::where('verifikasi','Proses Visitasi')->get())
-	    	return Datatable::collection(Visitasiapotek::where('perijinan_id','=','1')->where('verifikasi','=','Proses Visitasi')->orWhere('verifikasi','=','Visitasi Selesai')->orWhere('verifikasi','=','Visitasi Gagal')->get())
-	            ->showColumns('id', 'nama' , 'verifikasi')
+	     	 return Datatable::collection(Pengguna::where($matchThese)->orwhere($orThose)->orwhere($orThoses)->get())
+	            ->showColumns('id','nama', 'verifikasi', 'updated_at')
 	            ->addColumn('', function ($model) {
                     $html = '<center> <a href="'.route('admin.visitasiapoteks.edit', ['visitasiapoteks'=>$model->id]).'" class="btn btn-sm btn-default">Visitasi</a> ';
-					/*$html .= Form::open(array('url' => route('admin.visitasiapoteks.destroy', ['visitasiapoteks'=>$model->id]), 'method'=>'delete', 'class'=>'inline js-confirm'));
-					$html .= Form::submit('delete', array('class' => 'btn btn-sm btn-danger'));
-					$html .= Form::close();*/
+					// $html .= Form::open(array('url' => route('admin.visitasiapoteks.destroy', ['visitasiapoteks'=>$model->id]), 'method'=>'delete', 'class'=>'inline js-confirm'));
+					// $html .= Form::submit('delete', array('class' => 'btn btn-sm btn-danger'));
+					// $html .= Form::close();
 					return $html;
                 })
-	            ->searchColumns('nama', 'verifikasi')
-	            ->orderColumns('nama', 'verifikasi')
+	            ->searchColumns('nama', 'verifikasi', 'updated_at')
+	            ->orderColumns('nama', 'verifikasi', 'updated_at')
 	            ->make();
 	    }
 		return View::make('visitasiapoteks.index')->withTitle('Visitasi Apotek');
+
 	}
 
 	/**
@@ -48,16 +48,16 @@ class VisitasiapoteksController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Visitasiapotek::$rules);
+		$validator = Validator::make($data = Input::all(), Pengguna::$rules);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		$visitasi = Visitasiapotek::create($data);
+		$verifikasi = Pengguna::create($data);
 
-		return Redirect::route('admin.visitasiapoteks.index')->with("successMessage", "Berhasil menyimpan $visitasi->verifikasi ");
+		return Redirect::route('admin.visitasiapoteks.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi ");
 	}
 
 	/**
@@ -68,9 +68,9 @@ class VisitasiapoteksController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$visitasiapotek = Visitasiapotek::findOrFail($id);
+		$verifikasi = Pengguna::findOrFail($id);
 
-		return View::make('visitasiapoteks.show', compact('visitasiapotek'));
+		return View::make('visitasiapoteks.show', compact('verifikasi'));
 	}
 
 	/**
@@ -81,9 +81,15 @@ class VisitasiapoteksController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$visitasiapotek = Visitasiapotek::find($id);
 
-		return View::make('visitasiapoteks.edit', ['visitasiapotek'=>$visitasiapotek])->withTitle("Visitasi $visitasiapotek->nama");
+    	$verifikasi = Pengguna::findOrFail($id);
+
+	    $data = Verifikasiapotek::all();
+
+		// return View::make('devices', compact(['locations', 'devices']);
+
+		return View::make('visitasiapoteks.edit', ['verifikasi'=>$verifikasi, 'data'=>$data])->withTitle("Verifikasi $verifikasi->nama");
+
 	}
 
 	/**
@@ -95,9 +101,9 @@ class VisitasiapoteksController extends \BaseController {
 	public function update($id)
 	{
 
-		$visitasiapotek = Visitasiapotek::findOrFail($id);
+	    $verifikasi = Pengguna::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), Visitasiapotek::$rules);
+		$validator = Validator::make($data = Input::all(), Pengguna::$verifikasirules);
 
 		if ($validator->fails())
 		{
@@ -108,227 +114,59 @@ class VisitasiapoteksController extends \BaseController {
 
 		//$email = DB::table('penggunas')->select('email')->get();
 
-		if (Input::get('syarat1') === 'yes') {
-		    $syarat1 = 'Lengkap';
-		} else {
-			$syarat1 = 'Belum Lengkap';
-		}
+		$data = Verifikasiapotek::all();
 
-		if (Input::get('syarat2') === 'yes') {
-		    $syarat2 = 'Lengkap';
-		} else {
-			$syarat2 = 'Belum Lengkap';
-		}
+		$count = 0;
 
-		if (Input::get('syarat3') === 'yes') {
-		    $syarat3 = 'Lengkap';
-		} else {
-			$syarat3 = 'Belum Lengkap';
-		}
+		for($i=0; $i < count($data); $i++) {
 
-		if (Input::get('syarat4') === 'yes') {
-		    $syarat4 = 'Lengkap';
-		} else {
-			$syarat4 = 'Belum Lengkap';
-		}
+			$temp = (string)$i;
 
-		if (Input::get('syarat5') === 'yes') {
-		    $syarat5 = 'Lengkap';
-		} else {
-			$syarat5 = 'Belum Lengkap';
-		}
+			if (Input::get('syarat'.$i) === 'yes') {
+		    $syarat[$i] = 'Lengkap';
+		    $count++;
+			} else {
+			$syarat[$i] = 'Belum Lengkap';
+			}
 
-		if (Input::get('syarat6') === 'yes') {
-		    $syarat6 = 'Lengkap';
-		} else {
-			$syarat6 = 'Belum Lengkap';
-		}
-
-		  if (Input::get('syarat7') === 'yes') {
-		    $syarat7 = 'Lengkap';
-		} else {
-			$syarat7 = 'Belum Lengkap';
-		}
-
-		  if (Input::get('syarat8') === 'yes') {
-		    $syarat8 = 'Lengkap';
-		}  else {
-			$syarat8 = 'Belum Lengkap';
-		}
-
-		if (Input::get('syarat9') === 'yes') {
-		    $syarat9 = 'Lengkap';
-		} else {
-			$syarat9 = 'Belum Lengkap';
-		}
-
-		 if (Input::get('syarat10') === 'yes') {
-		    $syarat10 = 'Lengkap';
-		} else {
-			$syarat10 = 'Belum Lengkap';
-		}
-
-		 if (Input::get('syarat11') === 'yes') {
-		    $syarat11 = 'Lengkap';
-		} else {
-			$syarat11 = 'Belum Lengkap';
-		}
-
-		 if (Input::get('syarat12') === 'yes') {
-		    $syarat12 = 'Lengkap';
-		} else {
-			$syarat12 = 'Belum Lengkap';
-		}
-
-		 if (Input::get('syarat13') === 'yes') {
-		    $syarat13 = 'Lengkap';
-		} else {
-			$syarat13 = 'Belum Lengkap';
-		}
-
-		 if (Input::get('syarat14') === 'yes') {
-		    $syarat14 = 'Lengkap';
-		} else {
-			$syarat14 = 'Belum Lengkap';
-		}
-
-		 if (Input::get('syarat15') === 'yes') {
-		    $syarat15 = 'Lengkap';
-		} else {
-			$syarat15 = 'Belum Lengkap';
-		}
-
-		 if (Input::get('syarat16') === 'yes') {
-		    $syarat16 = 'Lengkap';
-		} else {
-			$syarat16 = 'Belum Lengkap';
-		}
-
-		 if (Input::get('syarat17') === 'yes') {
-		    $syarat17 = 'Lengkap';
-		}  else {
-			$syarat17 = 'Belum Lengkap';
-		}
-
-		if (Input::get('syarat18') === 'yes') {
-		    $syarat18 = 'Lengkap';
-		} else {
-			$syarat18 = 'Belum Lengkap';
-		}
-
-		 if (Input::get('syarat19') === 'yes') {
-		    $syarat19 = 'Lengkap';
-		}  else {
-			$syarat19 = 'Belum Lengkap';
-		}
-
-		if (Input::get('syarat20') === 'yes') {
-		    $syarat20 = 'Lengkap';
-		} else {
-			$syarat20 = 'Belum Lengkap';
-		}
-
-		 if (Input::get('syarat21') === 'yes') {
-		    $syarat21 = 'Lengkap';
-		}  else {
-			$syarat21 = 'Belum Lengkap';
-		}
-
-		if (Input::get('syarat22') === 'yes') {
-		    $syarat22 = 'Lengkap';
-		}  else {
-			$syarat22 = 'Belum Lengkap';
-		}
-
-		if (Input::get('syarat23') === 'yes') {
-		    $syarat23 = 'Lengkap';
-		} else {
-			$syarat23 = 'Belum Lengkap';
 		}
 
 		$syaratString = array(
-			'syarat1' => $syarat1,
-			'syarat2' => $syarat2,
-			'syarat3' => $syarat3,
-			'syarat4' => $syarat4,
-			'syarat5' => $syarat5,
-			'syarat6' => $syarat6,
-			'syarat7' => $syarat7,
-			'syarat8' => $syarat8,
-			'syarat9' => $syarat9,
-			'syarat10' => $syarat10,
-			'syarat11' => $syarat11,
-			'syarat12' => $syarat12,
-			'syarat13' => $syarat13,
-			'syarat14' => $syarat14,
-			'syarat15' => $syarat15,
-			'syarat16' => $syarat16,
-			'syarat17' => $syarat17,
-			'syarat18' => $syarat18,
-			'syarat19' => $syarat19,
-			'syarat20' => $syarat20,
-			'syarat21' => $syarat21,
-			'syarat22' => $syarat22,
-			'syarat23' => $syarat23,
-			'nama'	   => $visitasiapotek->nama
+		'nama'	   => $verifikasi->nama,
+		'data'	   => $data,
+		'syarat'   => $syarat
 		);
 
-		if(	$syarat1 === 'Lengkap' && 
-			$syarat2 === 'Lengkap' && 
-			$syarat3 === 'Lengkap' && 
-			$syarat4 === 'Lengkap' && 
-			$syarat5 === 'Lengkap' && 
-			$syarat6 === 'Lengkap' && 
-			$syarat7 === 'Lengkap' && 
-			$syarat8 === 'Lengkap' && 
-			$syarat9 === 'Lengkap' && 
-			$syarat10 === 'Lengkap' && 
-			$syarat11 === 'Lengkap' && 
-			$syarat12 === 'Lengkap' && 
-			$syarat13 === 'Lengkap' && 
-			$syarat14 === 'Lengkap' && 
-			$syarat15 === 'Lengkap' && 
-			$syarat16 === 'Lengkap' && 
-			$syarat17 === 'Lengkap' && 
-			$syarat18 === 'Lengkap' && 
-			$syarat19 === 'Lengkap' && 
-			$syarat20 === 'Lengkap' && 
-			$syarat21 === 'Lengkap' &&
-			$syarat22 === 'Lengkap' &&
-			$syarat23 === 'Lengkap' ) 
-		{
-			$visitasiapotek->verifikasi = "Visitasi Selesai";
-		} else {
-			$visitasiapotek->verifikasi = "Visitasi Gagal";
-		}
-		
-		$visitasiapotek->save();
-		
-		if('Visitasi Selesai'==$visitasiapotek->verifikasi) {
+		if( $count==count($data)) {
 
-		 	Mail::send('visitasiapoteks.email.messagesuccess',$syaratString, function($message) use($visitasiapotek){
+			$verifikasi->verifikasi = "Visitasi Selesai";
+
+		 	Mail::send('emails.visitasi.messagesuccess',$syaratString, function($message) use($verifikasi){
        		 
-       		$message->to($visitasiapotek->email,$visitasiapotek->nama)->subject('Visitasi Sistem Informasi Perizinan');
+       		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
    		 	});
 
-			//$visitasiapoteks = Pengguna::where('verifikasi','Visitasi Selesai')->get();
+ 		 	$hasil['verifikasi'] = $verifikasi;
+	        $pdf = PDF::loadView('pdf.hasilvisitasi', $hasil);
+	        return $pdf->download($verifikasi->nama.'_hasilvisitasiapoteks.pdf');
 
-   		   	$data['visitasiapoteks'] = $visitasiapotek;
-	        $pdf = PDF::loadView('pdf.hasilvisitasiapoteks', $data);
-	        return $pdf->download($visitasiapotek->nama.'_hasilvisitasiapoteks.pdf');
 
 		} else {
 
-			Mail::send('visitasiapoteks.email.messagefailed', $syaratString, function($message) use($visitasiapotek){
+			$verifikasi->verifikasi = "Visitasi Gagal";
+
+			Mail::send('emails.visitasi.messagefailed', $syaratString, function($message) use($verifikasi){
        		 
-       		$message->to($visitasiapotek->email,$visitasiapotek->nama)->subject('Visitasi Sistem Informasi Perizinan');
+       		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
    		 	});
-			//$visitasiapoteks = Pengguna::whereIn('perijinan_id', Input::get('perijinan_id'))->get();
+
 		}
 
-		return Redirect::route('admin.visitasiapoteks.index')->with("successMessage", "Berhasil menyimpan $visitasiapotek->verifikasi ");
+		$verifikasi->save();
+
+		return Redirect::route('admin.visitasiapoteks.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
 	}
 
 	/**
@@ -339,8 +177,8 @@ class VisitasiapoteksController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		 // mengecek apakah author bisa dihapus
-		if (!Visitasiapotek::destroy($id))
+		// mengecek apakah author bisa dihapus
+		if (!Pengguna::destroy($id))
 		{
 			return Redirect::back();
 		}
@@ -356,17 +194,6 @@ class VisitasiapoteksController extends \BaseController {
     public function export()
     {
         return View::make('visitasiapoteks.export')->withTitle('Export Data');
-  		// Excel::create('List Absensi', function($excel){
-		// 	$excel->sheet('Sheetname', function($sheet)
-		// 	{
-		// 		$data=[];
-		// 		array_push($data, array('Kevin','','','Suhin','Yah','Oke'));
-		// 		$sheet->fromArray($data,null,'A1',false,false);
-		// 		$perijinan = Perijinan::all();
-		// 		$sheet->fromModel($perijinan);
-		// 	});
-
-		// })->download('xls');
     }
 
     /**
@@ -377,25 +204,24 @@ class VisitasiapoteksController extends \BaseController {
     {
         // validasi
         $rules = ['verifikasi'=>'required', 'type'=>'required'];
-        $messages = ['verifikasi.required'=>'Anda belum memilih status verifikasi. Pilih minimal 1 status.'];
+        $messages = ['verifikasi.required'=>'Anda belum memilih status visitasi. Pilih minimal 1 status.'];
         $validator = Validator::make(Input::all(), $rules, $messages);
         if ($validator->fails())
         {
             return Redirect::back()->withErrors($validator);
         }
 
-        //$visitasiapoteks = Pengguna::where('perijinan_id', '1')->where('verifikasi',Input::get('verifikasi[1]'))->get();
-        $visitasiapoteks = Pengguna::where('perijinan_id', '1')->whereIn('verifikasi',Input::get('verifikasi'))->get();
-        //$visitasiapoteks = Pengguna::whereIn('perijinan_id', Input::get('perijinan_id'))->get();
+        //$verifikasiapoteks = Pengguna::whereIn('perijinan_id', Input::get('perijinan_id'))->get();
+        $verifikasi = Pengguna::where('perijinan_id', '1')->whereIn('verifikasi',Input::get('verifikasi'))->get();
 
         $type = Input::get('type');
         switch ($type) {
             case 'xls':
-                return $this->exportExcel($visitasiapoteks);
+                return $this->exportExcel($verifikasi);
                 break;
 
             case 'pdf':
-                return $this->exportPdf($visitasiapoteks);
+                return $this->exportPdf($verifikasi);
                 break;
 
             default:
@@ -407,14 +233,14 @@ class VisitasiapoteksController extends \BaseController {
      * Download excel data buku
      * @return PHPExcel
      */
-    private function exportExcel($visitasiapoteks)
+    private function exportExcel($verifikasi)
     {
-        Excel::create('Data Visitasi Perijinan', function($excel) use ($visitasiapoteks) {
+           Excel::create('Data Visitasi Perijinan', function($excel) use ($verifikasi) {
             // Set the properties
             $excel->setTitle('Data Visitasi Perijinan')
                   ->setCreator('Husin Nanda Perwira');
 
-            $excel->sheet('Data Visitasi', function($sheet) use ($visitasiapoteks) {
+            $excel->sheet('Data Visitasi', function($sheet) use ($verifikasi) {
                 $row = 1;
                 $sheet->row($row, array(
                     'Nama',
@@ -437,27 +263,27 @@ class VisitasiapoteksController extends \BaseController {
                     'Email',  
                     'Tanggal Registrasi'           
                 ));
-                foreach ($visitasiapoteks as $visitasiapotek) {
+                foreach ($verifikasi as $verifikasi) {
                    $sheet->row(++$row, array(
-                    $visitasiapotek->nama,
-                    $visitasiapotek->perijinan->nama,
-                    $visitasiapotek->lokasi,
-                    $visitasiapotek->verifikasi,
-                    $visitasiapotek->noktp,
-                    $visitasiapotek->berlaku,
-                    $visitasiapotek->tempatlahir,
-                    $visitasiapotek->tanggallahir,
-                    $visitasiapotek->jeniskelamin,
-                    $visitasiapotek->pekerjaan,
-                    $visitasiapotek->provinsi,
-                    $visitasiapotek->kabupaten,
-                    $visitasiapotek->kecamatan,
-                    $visitasiapotek->desa,
-                    $visitasiapotek->alamat,
-                    $visitasiapotek->kodepos,
-                    $visitasiapotek->nohp,
-                    $visitasiapotek->email,
-                    $visitasiapotek->created_at,
+                    $verifikasi->nama,
+                    $verifikasi->perijinan->nama,
+                    $verifikasi->lokasi,
+                    $verifikasi->verifikasi,
+                    $verifikasi->noktp,
+                    $verifikasi->berlaku,
+                    $verifikasi->tempatlahir,
+                    $verifikasi->tanggallahir,
+                    $verifikasi->jeniskelamin,
+                    $verifikasi->pekerjaan,
+                    $verifikasi->provinsi,
+                    $verifikasi->kabupaten,
+                    $verifikasi->kecamatan,
+                    $verifikasi->desa,
+                    $verifikasi->alamat,
+                    $verifikasi->kodepos,
+                    $verifikasi->nohp,
+                    $verifikasi->email,
+                    $verifikasi->created_at,
                 ));
                 }
             });
@@ -468,10 +294,10 @@ class VisitasiapoteksController extends \BaseController {
      * Download pdf data buku
      * @return Dompdf
      */
-    private function exportPdf($visitasiapoteks)
+    private function exportPdf($verifikasi)
     {
-        $data['visitasiapoteks'] = $visitasiapoteks;
-        $pdf = PDF::loadView('pdf.visitasiapoteks', $data);
+        $data['verifikasi'] = $verifikasi;
+        $pdf = PDF::loadView('pdf.visitasi', $data);
         return $pdf->download('visitasiapoteks.pdf');
     }
 

@@ -18,7 +18,7 @@
 @section('content')
 
    {{ Datatable::table()
-    ->addColumn('id','Nama' ,'Verifikasi', '')       // these are the column headings to be shown
+    ->addColumn('id','Nama' ,'Verifikasi', 'Tanggal Verifikasi', '')       // these are the column headings to be shown
     ->setOptions('aoColumnDefs',array(
         array(
             'bVisible' => false,
@@ -27,11 +27,14 @@
             'sTitle' => 'Nama',
             'aTargets' => [1]),
         array(
-            'sTitle' => 'Visitasi',
+            'sTitle' => 'Verifikasi',
             'aTargets' => [2]),
+         array(
+            'sTitle' => 'Tanggal Visitasi',
+            'aTargets' => [3]),
         array(
             'bSortable' => false,
-            'aTargets' => [3])
+            'aTargets' => [4])
         ))
     ->setOptions('bProcessing', true)
     ->setUrl(route('admin.visitasiapoteks.index'))   // this is the route where data will be retrieved

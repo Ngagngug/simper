@@ -31,11 +31,11 @@
                 <i class="fa fa-edit"></i> <span>Registrasi Perijinan</span>
               </a>
             </li>
-             <li class="treeview">
+             {{-- <li class="treeview">
               <a href="{{ URL::to('admin/perijinans') }}">
                 <i class="fa fa fa-book"></i> <span>Kategori Perijinan</span>
               </a>
-            </li>
+            </li> --}}
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-table"></i> <span>Verifikasi</span>

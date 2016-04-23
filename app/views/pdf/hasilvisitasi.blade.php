@@ -13,29 +13,32 @@
 </head>
 <body>
     <div style="font-family:Arial; font-size:16px;">
-            <center><h2>Berkas Visitasi Perijinan</h2></center> 
+            <center><h2>Berkas Visitasi Perijinan</h2></center>  
     </div>
     <br>
     <table class="tg">
         <thead>
             <tr>
                 <td class="tg-3wr7">Nama</td>
+                <td class="tg-3wr7">Perijinan</td>
                 <td class="tg-3wr7">Lokasi</td>
-                <td class="tg-3wr7">Keterangan</td>
+                <td class="tg-3wr7">Verifikasi</td>
                 <td class="tg-3wr7">Email</td>
-                <td class="tg-3wr7">Tanggal Visitasi</td>
+                <td class="tg-3wr7">Tanggal Registrasi</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td class="tg-rv4w">{{ $visitasiapoteks->nama }}</td>
-                <td class="tg-rv4w">{{ $visitasiapoteks->lokasi }}</td>
-                <td class="tg-rv4w">{{ $visitasiapoteks->verifikasi }}</td>
-                <td class="tg-rv4w">{{ $visitasiapoteks->email }}</td>
-                <td class="tg-rv4w">{{ $visitasiapoteks->created_at }}</td>          
+                <td class="tg-rv4w">{{ $verifikasi->nama }}</td>
+                <td class="tg-rv4w">{{ $verifikasi->perijinan->nama }}</td>
+                <td class="tg-rv4w">{{ $verifikasi->lokasi }}</td>
+                <td class="tg-rv4w">{{ $verifikasi->verifikasi }}</td>
+                <td class="tg-rv4w">{{ $verifikasi->email }}</td>
+                <td class="tg-rv4w">{{ $verifikasi->created_at }}</td>          
             </tr>
         </tbody>
     </table>
+
     <br><br>
     <span id="todays_date" style="font-family:Arial; font-size:14px;">
   <p>Boyolali 5 April 2016</p>

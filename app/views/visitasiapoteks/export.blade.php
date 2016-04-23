@@ -18,15 +18,6 @@
   <h3 class="box-title">Silahkan Pilih Data :</h3>
   </div><!-- /.box-header -->
     {{ Form::open(array('url' => route('admin.visitasiapoteks.exportpost'), 'method' => 'post', 'class'=>'box-body')) }}
-       {{--  <div class="form-group">
-            {{ Form::labelUI('perijinan_id', 'Pilih Kategori Perijinan') }}
-            {{ Form::select('perijinan_id[]', []+Perijinan::lists('nama','id'), null, array(
-                    'multiple',
-                    'id'=>'perijinan_id',
-                    'placeholder' => "Pilih Kategori Perijinan",
-                    'class' => "form-control select2")) }}
-        </div> --}}
-
          <div class="form-group">
             <label>Pilih Status Visitasi</label>          
             <select name="verifikasi[]" class="form-control select2" multiple="multiple" data-placeholder="Pilih Status Verifikasi" style="width: 100%;">
