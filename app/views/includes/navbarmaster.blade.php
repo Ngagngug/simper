@@ -65,15 +65,15 @@
                 <li><a href="{{ URL::to('admin/visitasiapoteks') }}"><i class="fa fa-circle-o"></i>Apotek</a></li>
                 <li><a href="{{ URL::to('admin/visitasiapotekrakyats') }}"><i class="fa fa-circle-o"></i>Apotek Rakyat</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>Puskesmas</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Klinik</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Klinik Dialisis</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Klinik Kecantikan Estetika</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Laboratorium Klinik Umum P</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Laboratorium Optik</a></li>
+                <li><a href="{{ URL::to('admin/visitasikliniks') }}"><i class="fa fa-circle-o"></i>Klinik</a></li>
+                <li><a href="{{ URL::to('admin/visitasiklinikdialises') }}"><i class="fa fa-circle-o"></i>Klinik Dialisis</a></li>
+                <li><a href="{{ URL::to('admin/visitasiklinikkecantikans') }}"><i class="fa fa-circle-o"></i>Klinik Kecantikan Estetika</a></li>
+                 <li><a href="{{ URL::to('admin/visitasilabklinikumums') }}"><i class="fa fa-circle-o"></i>Laboratorium Klinik Umum P</a></li>
+                <li><a href="{{ URL::to('admin/visitasilaboptiks') }}"><i class="fa fa-circle-o"></i>Laboratorium Optik</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>Optikal</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>Toko Obat</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>Pedagang Eceran Obat</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Toko Alat Kesehatan</a></li>
+                <li><a href="{{ URL::to('admin/visitasialatkesehatans') }}"><i class="fa fa-circle-o"></i>Toko Alat Kesehatan</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>Rumah Sakit</a></li>
               </ul>
             </li>

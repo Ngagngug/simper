@@ -88,12 +88,32 @@ Route::group(array('before' => 'auth'), function () {
    
         Route::get('visitasiapotekrakyats/export', array('as'=>'admin.visitasiapotekrakyats.export', 'uses'=>'VisitasiapotekrakyatsController@export'));
         Route::post('visitasiapotekrakyats/export-post', array('as'=>'admin.visitasiapotekrakyats.exportpost', 'uses'=>'VisitasiapotekrakyatsController@exportPost'));
-   
-    //Controller
+        
+        Route::get('visitasialatkesehatans/export', array('as'=>'admin.visitasialatkesehatans.export', 'uses'=>'VisitasialatkesehatansController@export'));
+        Route::post('visitasialatkesehatans/export-post', array('as'=>'admin.visitasialatkesehatans.exportpost', 'uses'=>'VisitasialatkesehatansController@exportPost'));
+
+        Route::get('visitasiklinikdialises/export', array('as'=>'admin.visitasiklinikdialises.export', 'uses'=>'VisitasiklinikdialisesController@export'));
+        Route::post('visitasiklinikdialises/export-post', array('as'=>'admin.visitasiklinikdialises.exportpost', 'uses'=>'VisitasiklinikdialisesController@exportPost'));
+
+        Route::get('visitasiklinikkecantikans/export', array('as'=>'admin.visitasiklinikkecantikans.export', 'uses'=>'VisitasiklinikkecantikansController@export'));
+        Route::post('visitasiklinikkecantikans/export-post', array('as'=>'admin.visitasiklinikkecantikans.exportpost', 'uses'=>'VisitasiklinikkecantikansController@exportPost'));
+
+        Route::get('visitasikliniks/export', array('as'=>'admin.visitasikliniks.export', 'uses'=>'VisitasikliniksController@export'));
+        Route::post('visitasikliniks/export-post', array('as'=>'admin.visitasikliniks.exportpost', 'uses'=>'VisitasikliniksController@exportPost'));
+
+        Route::get('visitasilabklinikumums/export', array('as'=>'admin.visitasilabklinikumums.export', 'uses'=>'VisitasilabklinikumumsController@export'));
+        Route::post('visitasilabklinikumums/export-post', array('as'=>'admin.visitasilabklinikumums.exportpost', 'uses'=>'VisitasilabklinikumumsController@exportPost'));
+
+        Route::get('visitasilaboptiks/export', array('as'=>'admin.visitasilaboptiks.export', 'uses'=>'VisitasilaboptiksController@export'));
+        Route::post('visitasilaboptiks/export-post', array('as'=>'admin.visitasilaboptiks.exportpost', 'uses'=>'VisitasilaboptiksController@exportPost'));
+
+
+
+    //Controller Recource
         Route::resource('penggunas', 'PenggunasController');
     	Route::resource('perijinans', 'PerijinansController');
 
-    //Verifikasi Controller
+    //Verifikasi Controller Recource
     	Route::resource('verifikasiapoteks', 'VerifikasiapoteksController');
         Route::resource('verifikasikliniks', 'VerifikasikliniksController');
         Route::resource('verifikasiklinikdialises', 'VerifikasiklinikdialisesController');
@@ -107,9 +127,15 @@ Route::group(array('before' => 'auth'), function () {
         Route::resource('verifikasirumahsakits', 'VerifikasirumahsakitsController');
 
 
-  //Visitasi Controller
+  //Visitasi Controller Recource
         Route::resource('visitasiapoteks', 'VisitasiapoteksController');
         Route::resource('visitasiapotekrakyats', 'VisitasiapotekrakyatsController');
+        Route::resource('visitasialatkesehatans', 'VisitasialatkesehatansController');
+        Route::resource('visitasiklinikdialises', 'VisitasiklinikdialisesController');
+        Route::resource('visitasiklinikkecantikans', 'VisitasiklinikkecantikansController');
+        Route::resource('visitasikliniks', 'VisitasikliniksController');
+        Route::resource('visitasilabklinikumums', 'VisitasilabklinikumumsController');
+        Route::resource('visitasilaboptiks', 'VisitasilaboptiksController');
 
         
         
