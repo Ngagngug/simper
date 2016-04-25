@@ -141,6 +141,8 @@ class VisitasiapoteksController extends \BaseController {
 
 			$verifikasi->verifikasi = "Visitasi Selesai";
 
+			$verifikasi->save();
+
 		 	Mail::send('emails.visitasi.messagesuccess',$syaratString, function($message) use($verifikasi){
        		 
        		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
@@ -156,6 +158,8 @@ class VisitasiapoteksController extends \BaseController {
 
 			$verifikasi->verifikasi = "Visitasi Gagal";
 
+			$verifikasi->save();
+
 			Mail::send('emails.visitasi.messagefailed', $syaratString, function($message) use($verifikasi){
        		 
        		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
@@ -163,9 +167,7 @@ class VisitasiapoteksController extends \BaseController {
    		 	});
 
 		}
-
-		$verifikasi->save();
-
+		
 		return Redirect::route('admin.visitasiapoteks.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
 	}
 

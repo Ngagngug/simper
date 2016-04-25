@@ -82,6 +82,17 @@ Route::group(array('before' => 'auth'), function () {
         Route::get('verifikasirumahsakits/export', array('as'=>'admin.verifikasirumahsakits.export', 'uses'=>'VerifikasirumahsakitsController@export'));
         Route::post('verifikasirumahsakits/export-post', array('as'=>'admin.verifikasirumahsakits.exportpost', 'uses'=>'VerifikasirumahsakitsController@exportPost'));
 
+        Route::get('verifikasilabklinikumummadyas/export', array('as'=>'admin.verifikasilabklinikumummadyas.export', 'uses'=>'VerifikasilabklinikumummadyasController@export'));
+        Route::post('verifikasilabklinikumummadyas/export-post', array('as'=>'admin.verifikasilabklinikumummadyas.exportpost', 'uses'=>'VerifikasilabklinikumummadyasController@exportPost'));
+
+        Route::get('verifikasiusahakecilobats/export', array('as'=>'admin.verifikasiusahakecilobats.export', 'uses'=>'VerifikasiusahakecilobatsController@export'));
+        Route::post('verifikasiusahakecilobats/export-post', array('as'=>'admin.verifikasiusahakecilobats.exportpost', 'uses'=>'VerifikasiusahakecilobatsController@exportPost'));
+
+        Route::get('verifikasiusahamikroobats/export', array('as'=>'admin.verifikasiusahamikroobats.export', 'uses'=>'VerifikasiusahamikroobatsController@export'));
+        Route::post('verifikasiusahamikroobats/export-post', array('as'=>'admin.verifikasiusahamikroobats.exportpost', 'uses'=>'VerifikasiusahamikroobatsController@exportPost'));
+
+
+
     //Visitasi Controller
         Route::get('visitasiapoteks/export', array('as'=>'admin.visitasiapoteks.export', 'uses'=>'VisitasiapoteksController@export'));
         Route::post('visitasiapoteks/export-post', array('as'=>'admin.visitasiapoteks.exportpost', 'uses'=>'VisitasiapoteksController@exportPost'));
@@ -116,6 +127,14 @@ Route::group(array('before' => 'auth'), function () {
         Route::get('visitasitokoobats/export', array('as'=>'admin.visitasitokoobats.export', 'uses'=>'VisitasitokoobatsController@export'));
         Route::post('visitasitokoobats/export-post', array('as'=>'admin.visitasitokoobats.exportpost', 'uses'=>'VisitasitokoobatsController@exportPost'));
 
+        Route::get('visitasilabklinikumummadyas/export', array('as'=>'admin.visitasilabklinikumummadyas.export', 'uses'=>'VisitasilabklinikumummadyasController@export'));
+        Route::post('visitasilabklinikumummadyas/export-post', array('as'=>'admin.visitasilabklinikumummadyas.exportpost', 'uses'=>'VisitasilabklinikumummadyasController@exportPost'));
+
+        Route::get('visitasiusahakecilobats/export', array('as'=>'admin.visitasiusahakecilobats.export', 'uses'=>'VisitasiusahakecilobatsController@export'));
+        Route::post('visitasiusahakecilobats/export-post', array('as'=>'admin.visitasiusahakecilobats.exportpost', 'uses'=>'VisitasiusahakecilobatsController@exportPost'));
+
+        Route::get('visitasiusahamikroobats/export', array('as'=>'admin.visitasiusahamikroobats.export', 'uses'=>'VisitasiusahamikroobatsController@export'));
+        Route::post('visitasiusahamikroobats/export-post', array('as'=>'admin.visitasiusahamikroobats.exportpost', 'uses'=>'VisitasiusahamikroobatsController@exportPost'));
 
     //Controller Recource
         Route::resource('penggunas', 'PenggunasController');
@@ -133,6 +152,9 @@ Route::group(array('before' => 'auth'), function () {
         Route::resource('verifikasiapotekrakyats', 'VerifikasiapotekrakyatsController');
         Route::resource('verifikasialatkesehatans', 'VerifikasialatkesehatansController');
         Route::resource('verifikasirumahsakits', 'VerifikasirumahsakitsController');
+        Route::resource('verifikasilabklinikumummadyas','VerifikasilabklinikumummadyasController');
+        Route::resource('verifikasiusahakecilobats', 'VerifikasiusahakecilobatsController');
+        Route::resource('verifikasiusahamikroobats', 'VerifikasiusahamikroobatsController');
 
 
   //Visitasi Controller Recource
@@ -147,6 +169,9 @@ Route::group(array('before' => 'auth'), function () {
         Route::resource('visitasioptikals', 'VisitasioptikalsController');
         Route::resource('visitasirumahsakits', 'VisitasirumahsakitsController');
         Route::resource('visitasitokoobats', 'VisitasitokoobatsController');
+        Route::resource('visitasilabklinikumummadyas', 'VisitasilabklinikumummadyasController');
+        Route::resource('visitasiusahakecilobats', 'VisitasiusahakecilobatsController');
+        Route::resource('visitasiusahamikroobats', 'VisitasiusahamikroobatsController');
 
         
         

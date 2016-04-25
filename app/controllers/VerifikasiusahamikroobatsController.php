@@ -1,53 +1,52 @@
 <?php
 
-class VisitasirumahsakitsController extends \BaseController {
+class VerifikasiusahamikroobatsController extends \BaseController {
 
 	/**
-	 * Display a listing of visitasiapoteks
+	 * Display a listing of verifikasitokoobats
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$matchThese = ['perijinan_id' => '12','verifikasi' => 'Visitasi Selesai'];
-		$orThose = ['perijinan_id' => '12','verifikasi' => 'Visitasi Gagal'];
-		$orThoses = ['perijinan_id' => '12','verifikasi' => 'Proses Visitasi'];
+		$matchThese = ['perijinan_id' => '15','verifikasi' => 'Proses Verifikasi'];
+		$orThose = ['perijinan_id' => '15','verifikasi' => 'Verifikasi Belum Lengkap'];
 		if(Datatable::shouldHandle())
 	    {
-	     	 return Datatable::collection(Pengguna::where($matchThese)->orwhere($orThose)->orwhere($orThoses)->get())
+	           return Datatable::collection(Pengguna::where($matchThese)->orwhere($orThose)->get())
 	            ->showColumns('id','nama', 'verifikasi', 'updated_at')
 	            ->addColumn('', function ($model) {
-                    $html = '<center> <a href="'.route('admin.visitasirumahsakits.edit', ['visitasirumahsakits'=>$model->id]).'" class="btn btn-sm btn-default">Visitasi</a> ';
-					// $html .= Form::open(array('url' => route('admin.visitasiapoteks.destroy', ['visitasiapoteks'=>$model->id]), 'method'=>'delete', 'class'=>'inline js-confirm'));
-					// $html .= Form::submit('delete', array('class' => 'btn btn-sm btn-danger'));
-					// $html .= Form::close();
+                    $html = '<center> <a href="'.route('admin.verifikasiusahamikroobats.edit', ['verifikasiusahamikroobats'=>$model->id]).'" class="btn btn-sm btn-default">Verifikasi</a> ';
+					$html .= Form::open(array('url' => route('admin.verifikasiusahamikroobats.destroy', ['verifikasiusahamikroobats'=>$model->id]), 'method'=>'delete', 'class'=>'inline js-confirm'));
+					$html .= Form::submit('delete', array('class' => 'btn btn-sm btn-danger'));
+					$html .= Form::close();
 					return $html;
                 })
 	            ->searchColumns('nama', 'verifikasi', 'updated_at')
 	            ->orderColumns('nama', 'verifikasi', 'updated_at')
 	            ->make();
 	    }
-		return View::make('visitasirumahsakits.index')->withTitle('Visitasi Rumah Sakit');
-
+		return View::make('verifikasiusahamikroobats.index')->withTitle('Verifikasi Usaha Mikro Obat');
 	}
 
 	/**
-	 * Show the form for creating a new visitasiapotek
+	 * Show the form for creating a new verifikasitokoobat
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		return View::make('visitasirumahsakits.create')->withTitle('Tambah Visitasi');
+		return View::make('verifikasiusahamikroobats.create')->withTitle('Tambah Verifikasi');
 	}
 
 	/**
-	 * Store a newly created visitasiapotek in storage.
+	 * Store a newly created verifikasitokoobat in storage.
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
+		
 		$validator = Validator::make($data = Input::all(), Pengguna::$rules);
 
 		if ($validator->fails())
@@ -57,51 +56,55 @@ class VisitasirumahsakitsController extends \BaseController {
 
 		$verifikasi = Pengguna::create($data);
 
-		return Redirect::route('admin.visitasirumahsakits.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi ");
+		return Redirect::route('admin.verifikasiusahamikroobats.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi ");
+
+
 	}
 
 	/**
-	 * Display the specified visitasiapotek.
+	 * Display the specified verifikasitokoobat.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function show($id)
 	{
+
 		$verifikasi = Pengguna::findOrFail($id);
 
-		return View::make('visitasirumahsakits.show', compact('verifikasi'));
+		return View::make('verifikasiusahamikroobats.show', compact('verifikasi'));
+
 	}
 
 	/**
-	 * Show the form for editing the specified visitasiapotek.
+	 * Show the form for editing the specified verifikasitokoobat.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
-	{
+	{	
+		$verifikasi = Pengguna::findOrFail($id);
 
-    	$verifikasi = Pengguna::findOrFail($id);
-
-	    $data = Verifikasirumahsakit::all();
+	    $data = Verifikasiusahamikroobat::all();
 
 		// return View::make('devices', compact(['locations', 'devices']);
 
-		return View::make('visitasirumahsakits.edit', ['verifikasi'=>$verifikasi, 'data'=>$data])->withTitle("Verifikasi $verifikasi->nama");
+		return View::make('verifikasiusahamikroobats.edit', ['verifikasi'=>$verifikasi, 'data'=>$data])->withTitle("Verifikasi $verifikasi->nama");
+
 
 	}
 
 	/**
-	 * Update the specified visitasiapotek in storage.
+	 * Update the specified verifikasitokoobat in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function update($id)
 	{
-
-	    $verifikasi = Pengguna::findOrFail($id);
+	
+		$verifikasi = Pengguna::findOrFail($id);
 
 		$validator = Validator::make($data = Input::all(), Pengguna::$verifikasirules);
 
@@ -110,11 +113,7 @@ class VisitasirumahsakitsController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		//$syaratString = implode(",", Input::get('syarat'));
-
-		//$email = DB::table('penggunas')->select('email')->get();
-
-		$data = Verifikasirumahsakit::all();
+		$data = Verifikasiusahamikroobat::all();
 
 		$count = 0;
 
@@ -136,31 +135,22 @@ class VisitasirumahsakitsController extends \BaseController {
 		'data'	   => $data,
 		'syarat'   => $syarat
 		);
-
+		
 		if( $count==count($data)) {
 
-			$verifikasi->verifikasi = "Visitasi Selesai";
+			$verifikasi->verifikasi = "Proses Visitasi";
 
-			$verifikasi->save();
-
-		 	Mail::send('emails.visitasi.messagesuccess',$syaratString, function($message) use($verifikasi){
+		 	Mail::send('emails.verifikasi.messagesuccess',$syaratString, function($message) use($verifikasi){
        		 
        		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
    		 	});
 
- 		 	$hasil['verifikasi'] = $verifikasi;
-	        $pdf = PDF::loadView('pdf.hasilvisitasi', $hasil);
-	        return $pdf->download($verifikasi->nama.'_visitasirumahsakits.pdf');
-
-
 		} else {
 
-			$verifikasi->verifikasi = "Visitasi Gagal";
+			$verifikasi->verifikasi = "Verifikasi Belum Lengkap";
 
-			$verifikasi->save();
-
-			Mail::send('emails.visitasi.messagefailed', $syaratString, function($message) use($verifikasi){
+			Mail::send('emails.verifikasi.messagefailed', $syaratString, function($message) use($verifikasi){
        		 
        		$message->to($verifikasi->email,$verifikasi->nama)->subject('Verifikasi Sistem Informasi Perizinan');
    		 
@@ -168,11 +158,15 @@ class VisitasirumahsakitsController extends \BaseController {
 
 		}
 
-		return Redirect::route('admin.visitasirumahsakits.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
+		$verifikasi->save();
+
+		return Redirect::route('admin.verifikasiusahamikroobats.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
+
+
 	}
 
 	/**
-	 * Remove the specified visitasiapotek from storage.
+	 * Remove the specified verifikasitokoobat from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -185,7 +179,7 @@ class VisitasirumahsakitsController extends \BaseController {
 			return Redirect::back();
 		}
 
-		return Redirect::route('admin.visitasirumahsakits.index')->with('successMessage', 'User berhasil dihapus.');
+		return Redirect::route('admin.verifikasiusahamikroobats.index')->with('successMessage', 'User berhasil dihapus.');
 
 	}
 
@@ -195,7 +189,7 @@ class VisitasirumahsakitsController extends \BaseController {
      */
     public function export()
     {
-        return View::make('visitasirumahsakits.export')->withTitle('Export Data');
+        return View::make('verifikasiusahamikroobats.export')->withTitle('Export Data');
     }
 
     /**
@@ -214,7 +208,7 @@ class VisitasirumahsakitsController extends \BaseController {
         }
 
         //$verifikasiapoteks = Pengguna::whereIn('perijinan_id', Input::get('perijinan_id'))->get();
-        $verifikasi = Pengguna::where('perijinan_id', '12')->whereIn('verifikasi',Input::get('verifikasi'))->get();
+        $verifikasi = Pengguna::where('perijinan_id', '15')->whereIn('verifikasi',Input::get('verifikasi'))->get();
 
         $type = Input::get('type');
         switch ($type) {
@@ -237,12 +231,12 @@ class VisitasirumahsakitsController extends \BaseController {
      */
     private function exportExcel($verifikasi)
     {
-           Excel::create('Data Visitasi Perijinan', function($excel) use ($verifikasi) {
+        Excel::create('Data Verifikasi Perijinan', function($excel) use ($verifikasi) {
             // Set the properties
-            $excel->setTitle('Data Visitasi Perijinan')
+            $excel->setTitle('Data Verifikasi Perijinan')
                   ->setCreator('Husin Nanda Perwira');
 
-            $excel->sheet('Data Visitasi', function($sheet) use ($verifikasi) {
+            $excel->sheet('Data Verifikasi', function($sheet) use ($verifikasi) {
                 $row = 1;
                 $sheet->row($row, array(
                     'Nama',
@@ -299,8 +293,10 @@ class VisitasirumahsakitsController extends \BaseController {
     private function exportPdf($verifikasi)
     {
         $data['verifikasi'] = $verifikasi;
-        $pdf = PDF::loadView('pdf.visitasi', $data);
-        return $pdf->download('visitasirumahsakits.pdf');
+        $pdf = PDF::loadView('pdf.verifikasi', $data);
+        return $pdf->download('verifikasiusahamikroobats.pdf');
     }
+
+
 
 }
