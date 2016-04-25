@@ -1,0 +1,1 @@
+C:\wamp64\www\first\app/views/visitasitokoobats/show.blade.php

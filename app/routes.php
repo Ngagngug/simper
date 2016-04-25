@@ -107,6 +107,14 @@ Route::group(array('before' => 'auth'), function () {
         Route::get('visitasilaboptiks/export', array('as'=>'admin.visitasilaboptiks.export', 'uses'=>'VisitasilaboptiksController@export'));
         Route::post('visitasilaboptiks/export-post', array('as'=>'admin.visitasilaboptiks.exportpost', 'uses'=>'VisitasilaboptiksController@exportPost'));
 
+        Route::get('visitasioptikals/export', array('as'=>'admin.visitasioptikals.export', 'uses'=>'VisitasioptikalsController@export'));
+        Route::post('visitasioptikals/export-post', array('as'=>'admin.visitasioptikals.exportpost', 'uses'=>'VisitasioptikalsController@exportPost'));
+
+        Route::get('visitasirumahsakits/export', array('as'=>'admin.visitasirumahsakits.export', 'uses'=>'VisitasirumahsakitsController@export'));
+        Route::post('visitasirumahsakits/export-post', array('as'=>'admin.visitasirumahsakits.exportpost', 'uses'=>'VisitasirumahsakitsController@exportPost'));
+
+        Route::get('visitasitokoobats/export', array('as'=>'admin.visitasitokoobats.export', 'uses'=>'VisitasitokoobatsController@export'));
+        Route::post('visitasitokoobats/export-post', array('as'=>'admin.visitasitokoobats.exportpost', 'uses'=>'VisitasitokoobatsController@exportPost'));
 
 
     //Controller Recource
@@ -136,6 +144,9 @@ Route::group(array('before' => 'auth'), function () {
         Route::resource('visitasikliniks', 'VisitasikliniksController');
         Route::resource('visitasilabklinikumums', 'VisitasilabklinikumumsController');
         Route::resource('visitasilaboptiks', 'VisitasilaboptiksController');
+        Route::resource('visitasioptikals', 'VisitasioptikalsController');
+        Route::resource('visitasirumahsakits', 'VisitasirumahsakitsController');
+        Route::resource('visitasitokoobats', 'VisitasitokoobatsController');
 
         
         

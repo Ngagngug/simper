@@ -70,11 +70,10 @@
                 <li><a href="{{ URL::to('admin/visitasiklinikkecantikans') }}"><i class="fa fa-circle-o"></i>Klinik Kecantikan Estetika</a></li>
                  <li><a href="{{ URL::to('admin/visitasilabklinikumums') }}"><i class="fa fa-circle-o"></i>Laboratorium Klinik Umum P</a></li>
                 <li><a href="{{ URL::to('admin/visitasilaboptiks') }}"><i class="fa fa-circle-o"></i>Laboratorium Optik</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Optikal</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Toko Obat</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Pedagang Eceran Obat</a></li>
+                <li><a href="{{ URL::to('admin/visitasioptikals') }}"><i class="fa fa-circle-o"></i>Optikal</a></li>
+                <li><a href="{{ URL::to('admin/visitasitokoobats') }}"><i class="fa fa-circle-o"></i>Toko Obat</a></li>
                 <li><a href="{{ URL::to('admin/visitasialatkesehatans') }}"><i class="fa fa-circle-o"></i>Toko Alat Kesehatan</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Rumah Sakit</a></li>
+                <li><a href="{{ URL::to('admin/visitasirumahsakits') }}"><i class="fa fa-circle-o"></i>Rumah Sakit</a></li>
               </ul>
             </li>
              <li class="treeview">
