@@ -25,6 +25,7 @@ class PerijinansTableSeeder extends Seeder {
             ['id'=>13, 'nama'=>'Ijin Laboratorium Klinik Umum Madya', 'created_at'=>'2016-03-18 11:15:22', 'updated_at'=>'2016-03-18 11:15:22'],
             ['id'=>14, 'nama'=>'Ijin Usaha Kecil Obat Tradisional', 'created_at'=>'2016-03-18 11:15:22', 'updated_at'=>'2016-03-18 11:15:22'],
             ['id'=>15, 'nama'=>'Ijin Usaha Mikro Obat Tradisional', 'created_at'=>'2016-03-18 11:15:22', 'updated_at'=>'2016-03-18 11:15:22'],
+            ['id'=>16, 'nama'=>'Ijin Unit Transfusi Darah', 'created_at'=>'2016-03-18 11:15:22', 'updated_at'=>'2016-03-18 11:15:22'],
             ];
 
       DB::table('perijinans')->insert($perijinans);

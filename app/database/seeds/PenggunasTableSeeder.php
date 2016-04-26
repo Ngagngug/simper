@@ -55,6 +55,9 @@ class PenggunasTableSeeder extends Seeder {
       		['id'=>15, 'perijinan_id'=>15, 'lokasi'=>'Usaha Mikro Obat Tradisional A', 'nama'=>'Hermansyah', 'noktp'=>'123456789', 'berlaku'=>'22-08-2017','tempatlahir'=>'Tegal', 'tanggallahir'=>'22-08-1993', 
 		    'jeniskelamin'=>'Laki-laki', 'pekerjaan'=>'PNS', 'provinsi'=>'Jawa Tengah', 'kabupaten'=>'Tegal', 'kecamatan'=>'Tegal', 'desa'=>'Randugunting', 'alamat'=>'Arum Indah V', 
 		    'kodepos'=>'52131', 'nohp'=>'085702666300', 'email'=>'husin.napi@gmail.com', 'verifikasi'=>'Proses Verifikasi', 'created_at'=>'2016-04-03 11:15:22', 'updated_at'=>'2016-04-03 11:15:22'],
+  			['id'=>16, 'perijinan_id'=>16, 'lokasi'=>'Unit Transfusi Darah A', 'nama'=>'Anis', 'noktp'=>'123456789', 'berlaku'=>'22-08-2017','tempatlahir'=>'Tegal', 'tanggallahir'=>'22-08-1993', 
+		    'jeniskelamin'=>'Laki-laki', 'pekerjaan'=>'PNS', 'provinsi'=>'Jawa Tengah', 'kabupaten'=>'Tegal', 'kecamatan'=>'Tegal', 'desa'=>'Randugunting', 'alamat'=>'Arum Indah V', 
+		    'kodepos'=>'52131', 'nohp'=>'085702666300', 'email'=>'husin.napi@gmail.com', 'verifikasi'=>'Proses Verifikasi', 'created_at'=>'2016-04-03 11:15:22', 'updated_at'=>'2016-04-03 11:15:22'],
       		];
 
       DB::table('penggunas')->insert($penggunas);

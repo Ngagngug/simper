@@ -57,6 +57,7 @@
                 <li><a href="{{ URL::to('admin/verifikasirumahsakits') }}"><i class="fa fa-circle-o"></i>Rumah Sakit</a></li>
                 <li><a href="{{ URL::to('admin/verifikasiusahakecilobats') }}"><i class="fa fa-circle-o"></i>Usaha Kecil Obat Tradisional</a></li>
                 <li><a href="{{ URL::to('admin/verifikasiusahamikroobats') }}"><i class="fa fa-circle-o"></i>Usaha Mikro Obat Tradisional</a></li>
+                <li><a href="{{ URL::to('admin/verifikasiunittransfusidarahs') }}"><i class="fa fa-circle-o"></i>Unit Transfusi Darah</a></li>
               </ul>
             </li>
              <li class="treeview">
@@ -80,6 +81,7 @@
                 <li><a href="{{ URL::to('admin/visitasirumahsakits') }}"><i class="fa fa-circle-o"></i>Rumah Sakit</a></li>
                  <li><a href="{{ URL::to('admin/visitasiusahakecilobats') }}"><i class="fa fa-circle-o"></i>Usaha Kecil Obat Tradisional</a></li>
                 <li><a href="{{ URL::to('admin/visitasiusahamikroobats') }}"><i class="fa fa-circle-o"></i>Usaha Mikro Obat Tradisional</a></li>
+                <li><a href="{{ URL::to('admin/visitasiunittransfusidarahs') }}"><i class="fa fa-circle-o"></i>Unit Transfusi Darah</a></li>
               </ul>
             </li>
              <li class="treeview">
