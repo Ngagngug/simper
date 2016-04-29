@@ -107,7 +107,7 @@
             </div><!-- ./col -->
           </div><!-- /.row -->
           <!-- Main row -->
-          <div class="row">
+       {{--    <div class="row">
             <!-- Left col -->
             <section class="col-lg-12 connectedSortable">
               <!-- Custom tabs (Charts with tabs)-->
@@ -201,7 +201,7 @@
                 </div>
               </div><!-- /.nav-tabs-custom -->
             </section>
-            </div>
+            </div> --}}
            <!--  <div class="row">
              <div class="col-md-12">
                  <h1>{{ $title }}</h1>

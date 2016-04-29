@@ -151,8 +151,7 @@ class VisitasiunittransfusidarahsController extends \BaseController {
 
  		 	$hasil['verifikasi'] = $verifikasi;
 	        $pdf = PDF::loadView('pdf.hasilvisitasi', $hasil);
-	        return $pdf->download($verifikasi->nama.'_visitasiunittransfusidarahs.pdf');
-
+         	return $pdf->download($verifikasi->nama.'_visitasiunittransfusidarahs.pdf');
 
 		} else {
 
@@ -166,10 +165,12 @@ class VisitasiunittransfusidarahsController extends \BaseController {
    		 
    		 	});
 
-		}
+   	 	}
 
-		return Redirect::route('admin.visitasiunittransfusidarahs.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
-	}
+   		return Redirect::route('admin.visitasiunittransfusidarahs.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
+	
+
+		}
 
 	/**
 	 * Remove the specified visitasiapotek from storage.

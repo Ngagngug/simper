@@ -151,8 +151,7 @@ class VisitasiusahamikroobatsController extends \BaseController {
 
  		 	$hasil['verifikasi'] = $verifikasi;
 	        $pdf = PDF::loadView('pdf.hasilvisitasi', $hasil);
-	        return $pdf->download($verifikasi->nama.'_visitasiusahamikroobats.pdf');
-
+			return $pdf->download($verifikasi->nama.'_visitasiusahamikroobats.pdf');
 
 		} else {
 
@@ -169,6 +168,7 @@ class VisitasiusahamikroobatsController extends \BaseController {
 		}
 
 		return Redirect::route('admin.visitasiusahamikroobats.index')->with("successMessage", "Berhasil menyimpan $verifikasi->verifikasi" );
+
 	}
 
 	/**

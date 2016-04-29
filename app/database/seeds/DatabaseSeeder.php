@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('SentrySeeder');
 		$this->call('PerijinansTableSeeder');
 		$this->call('PenggunasTableSeeder');
+		$this->call('PetugasesTableSeeder');
 		$this->call('VerifikasiapoteksTableSeeder');
 		$this->call('VerifikasikliniksTableSeeder');
 		$this->call('VerifikasiklinikdialisisTableSeeder');

@@ -13,7 +13,7 @@
 </head>
 <body>
     <div style="font-family:Arial; font-size:16px;">
-            <center><h2>Berkas Visitasi Perijinan</h2></center>  
+            <center><h2>Data Pelamar Perijinan</h2></center>  
     </div>
     <br>
     <table class="tg">
@@ -28,23 +28,17 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($petugases as $petugase)
             <tr>
-                <td class="tg-rv4w">{{ $verifikasi->nama }}</td>
-                <td class="tg-rv4w">{{ $verifikasi->perijinan->nama }}</td>
-                <td class="tg-rv4w">{{ $verifikasi->lokasi }}</td>
-                <td class="tg-rv4w">{{ $verifikasi->verifikasi }}</td>
-                <td class="tg-rv4w">{{ $verifikasi->email }}</td>
-                <td class="tg-rv4w">{{ $verifikasi->created_at }}</td>          
+                <td class="tg-rv4w">{{ $petugase->nama }}</td>
+                <td class="tg-rv4w">{{ $petugase->perijinan->nama }}</td>
+                <td class="tg-rv4w">{{ $petugase->lokasi }}</td>
+                <td class="tg-rv4w">{{ $petugase->verifikasi }}</td>
+                <td class="tg-rv4w">{{ $petugase->email }}</td>
+                <td class="tg-rv4w">{{ $petugase->created_at }}</td>          
             </tr>
+            @endforeach
         </tbody>
     </table>
-
-    <br><br>
-    <span id="todays_date" style="font-family:Arial; font-size:14px;">
-   <p>Boyolali, {{ $ldate = date('d-m-Y') }}</p>
-  <p>Petugas Surat Perijinan</p>
-  <br>
-  <p>...................................</p>
-  </span>
 </body>
 </html>

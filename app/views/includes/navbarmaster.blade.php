@@ -36,6 +36,11 @@
                 <i class="fa fa fa-book"></i> <span>Kategori Perijinan</span>
               </a>
             </li> --}}
+             <li class="treeview">
+              <a href="{{ URL::to('admin/petugases') }}">
+                <i class="fa fa fa-book"></i> <span>Petugas</span>
+              </a>
+            </li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-table"></i> <span>Verifikasi</span>
