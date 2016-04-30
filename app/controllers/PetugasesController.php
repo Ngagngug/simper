@@ -10,11 +10,14 @@ class PetugasesController extends \BaseController {
 	{
 		if(Datatable::shouldHandle())
 	    {
-	        return Datatable::collection(Petugase::with('perijinan')->get())
-                ->addColumn('perijinan', function ($model) {
-				   return $model->perijinan->nama;
+        	$usersArray = Sentry::findAllUsersWithAccess('regular');
+            $usersCollection = new Illuminate\Database\Eloquent\Collection($usersArray);
+
+	        return Datatable::collection($usersCollection)
+                ->addColumn('first_name', function ($model) {
+				   return $model->first_name . ' ' . $model->last_name;
 				   })
-	            ->showColumns('id', 'lokasi', 'nama', 'verifikasi', 'created_at')
+	            ->showColumns('created_at')
 	            ->addColumn('', function ($model) {
                     $html = '<center> <a href="'.route('admin.petugases.edit', ['petugases'=>$model->id]).'" class="btn btn-sm btn-default">edit</a> ';
 					$html .= Form::open(array('url' => route('admin.petugases.destroy', ['petugases'=>$model->id]), 'method'=>'delete', 'class'=>'inline js-confirm'));
@@ -22,11 +25,11 @@ class PetugasesController extends \BaseController {
 					$html .= Form::close();
 					return $html;
                 })
-	            ->searchColumns('perijinan', 'lokasi', 'nama', 'verifikasi', 'created_at')
-	            ->orderColumns('perijinan', 'lokasi', 'nama', 'verifikasi', 'created_at')
+	            ->searchColumns('first_name', 'created_at')
+	            ->orderColumns('first_name', 'created_at')
 	            ->make();
 	    }
-		return View::make('petugases.index')->withTitle('Pelamar');
+		return View::make('petugases.index')->withTitle('Petugas');
 	}
 
 	/**
@@ -55,9 +58,14 @@ class PetugasesController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 
-		$petugases = Petugase::create($data);
+		$petugases = Sentry::register(Input::all(), true);
 
-		return Redirect::route('admin.petugases.index')->with("successMessage", "Berhasil menyimpan $petugases->nama ");
+		$regularGroup = Sentry::findGroupByName('regular');
+
+            // Masukkan user ke grup regular
+        $petugases->addGroup($regularGroup);
+
+		return Redirect::route('admin.petugases.index')->with("successMessage", "Berhasil menyimpan $petugases->first_name " . " " . "$petugases->last_name");
 	}
 
 	/**
@@ -83,7 +91,7 @@ class PetugasesController extends \BaseController {
 	{
 		$petugase = Petugase::find($id);
 
-		return View::make('petugases.edit', ['petugase'=>$petugase])->withTitle("Ubah $petugase->nama");
+		return View::make('petugases.edit', ['petugase'=>$petugase])->withTitle("Ubah $petugase->first_name" . " " . "$petugase->last_name");
 	}
 
 	/**
@@ -105,7 +113,7 @@ class PetugasesController extends \BaseController {
 
 		$petugase->update($data);
 
-		return Redirect::route('admin.petugases.index')->with("successMessage", "Berhasil menyimpan $petugase->nama ");
+		return Redirect::route('admin.petugases.index')->with("successMessage", "Berhasil menyimpan $petugase->first_name" . " " . "$petugase->last_name ");
 	}
 
 	/**
@@ -117,12 +125,11 @@ class PetugasesController extends \BaseController {
 	public function destroy($id)
 	{
 		// mengecek apakah author bisa dihapus
-		if (!Petugase::destroy($id))
-		{
-			return Redirect::back();
-		}
 
-		return Redirect::route('admin.petugases.index')->with('successMessage', 'User berhasil dihapus.');
+		$petugase = User::find($id);
+        $petugase->delete();
+
+        return Redirect::route('admin.petugases.index')->with('successMessage', 'User berhasil dihapus');
 	}
 
 	/**
@@ -152,24 +159,26 @@ class PetugasesController extends \BaseController {
     public function exportPost()
     {
         // validasi
-        $rules = ['perijinan_id'=>'required', 'type'=>'required'];
-        $messages = ['perijinan_id.required'=>'Anda belum memilih kategori. Pilih minimal 1 kategori.'];
-        $validator = Validator::make(Input::all(), $rules, $messages);
-        if ($validator->fails())
-        {
-            return Redirect::back()->withErrors($validator);
-        }
+        // $rules = ['perijinan_id'=>'required', 'type'=>'required'];
+        // $messages = ['perijinan_id.required'=>'Anda belum memilih kategori. Pilih minimal 1 kategori.'];
+        // $validator = Validator::make(Input::all(), $rules, $messages);
+        // if ($validator->fails())
+        // {
+        //     return Redirect::back()->withErrors($validator);
+        // }
 
-        $petugases = Petugase::whereIn('perijinan_id', Input::get('perijinan_id'))->get();
+		$usersArray = Sentry::findAllUsersWithAccess('regular');
+	    $usersCollection = new Illuminate\Database\Eloquent\Collection($usersArray);
+			
 
         $type = Input::get('type');
         switch ($type) {
             case 'xls':
-                return $this->exportExcel($petugases);
+                return $this->exportExcel($usersCollection);
                 break;
 
             case 'pdf':
-                return $this->exportPdf($petugases);
+                return $this->exportPdf($usersCollection);
                 break;
 
             default:
@@ -181,57 +190,29 @@ class PetugasesController extends \BaseController {
      * Download excel data buku
      * @return PHPExcel
      */
-    private function exportExcel($petugases)
+    private function exportExcel($usersCollection)
     {
-        Excel::create('Data Pelamar Perijinan', function($excel) use ($petugases) {
+        Excel::create('Data Petugas Perijinan', function($excel) use ($usersCollection) {
             // Set the properties
-            $excel->setTitle('Data Pelamar Perijinan')
+            $excel->setTitle('Data Petugas Perijinan')
                   ->setCreator('Husin Nanda Perwira');
 
-            $excel->sheet('Data Pelamar', function($sheet) use ($petugases) {
+            $excel->sheet('Data Petugas', function($sheet) use ($usersCollection) {
                 $row = 1;
                 $sheet->row($row, array(
-                    'Nama',
-                    'Perijinan',
-                    'Lokasi',
-                    'Verifikasi',
-                    'No Ktp',
-                    'Berlaku',
-                    'Tempat Lahir',
-                    'Tanggal Lahir',
-                    'Jenis Kelamin',
-                    'Pekerjaan',
-                    'Provinsi', 
-                    'Kabupaten',
-                    'Kecamatan',
-                    'Desa',
-                    'Alamat',
-                    'Kode Pos',
-                    'No HP',
-                    'Email',  
-                    'Tanggal Registrasi'           
+                    'Email',
+                    'Password',
+                    'Nama Depam',
+                    'Nama Belakang',
+                    'Registrasi',     
                 ));
-                foreach ($petugases as $petugase) {
+                foreach ($usersCollection as $usersCollectione) {
                    $sheet->row(++$row, array(
-                    $petugase->nama,
-                    $petugase->perijinan->nama,
-                    $petugase->lokasi,
-                    $petugase->verifikasi,
-                    $petugase->noktp,
-                    $petugase->berlaku,
-                    $petugase->tempatlahir,
-                    $petugase->tanggallahir,
-                    $petugase->jeniskelamin,
-                    $petugase->pekerjaan,
-                    $petugase->provinsi,
-                    $petugase->kabupaten,
-                    $petugase->kecamatan,
-                    $petugase->desa,
-                    $petugase->alamat,
-                    $petugase->kodepos,
-                    $petugase->nohp,
-                    $petugase->email,
-                    $petugase->created_at,
+                    $usersCollectione->email,
+                    $usersCollectione->password,
+                    $usersCollectione->first_name,
+                    $usersCollectione->last_name,
+                    $usersCollectione->created_at,
                 ));
                 }
             });
@@ -242,9 +223,9 @@ class PetugasesController extends \BaseController {
      * Download pdf data buku
      * @return Dompdf
      */
-    private function exportPdf($petugases)
+    private function exportPdf($usersCollection)
     {
-        $data['petugases'] = $petugases;
+        $data['usersCollection'] = $usersCollection;
         $pdf = PDF::loadView('pdf.petugases', $data);
         return $pdf->download('petugas.pdf');
     }

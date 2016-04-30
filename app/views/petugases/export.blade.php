@@ -18,14 +18,14 @@
   <h3 class="box-title">Silahkan Pilih Data :</h3>
   </div><!-- /.box-header -->
     {{ Form::open(array('url' => route('admin.petugases.exportpost'), 'method' => 'post', 'class'=>'box-body')) }}
-        <div class="form-group">
+       {{--  <div class="form-group">
             {{ Form::labelUI('perijinan_id', 'Pilih Kategori Perijinan') }}
             {{ Form::select('perijinan_id[]', []+Perijinan::lists('nama','id'), null, array(
                     'multiple',
                     'id'=>'perijinan_id',
                     'placeholder' => "Pilih Kategori Perijinan",
                     'class' => "form-control select2")) }}
-        </div>
+        </div> --}}
 
         <div class="form-group">
             {{ Form::labelUI('type', 'Pilih Output') }}

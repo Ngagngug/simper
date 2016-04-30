@@ -13,29 +13,27 @@
 </head>
 <body>
     <div style="font-family:Arial; font-size:16px;">
-            <center><h2>Data Pelamar Perijinan</h2></center>  
+            <center><h2>Data Petugas Perijinan Boyolali</h2></center>  
     </div>
     <br>
     <table class="tg">
         <thead>
             <tr>
-                <td class="tg-3wr7">Nama</td>
-                <td class="tg-3wr7">Perijinan</td>
-                <td class="tg-3wr7">Lokasi</td>
-                <td class="tg-3wr7">Verifikasi</td>
                 <td class="tg-3wr7">Email</td>
-                <td class="tg-3wr7">Tanggal Registrasi</td>
+                <td class="tg-3wr7">Password</td>
+                <td class="tg-3wr7">Nama Depan</td>
+                <td class="tg-3wr7">Nama Belakang</td>
+                <td class="tg-3wr7">Registrasi</td>
             </tr>
         </thead>
         <tbody>
-            @foreach ($petugases as $petugase)
+            @foreach ($usersCollection as $usersCollectione)
             <tr>
-                <td class="tg-rv4w">{{ $petugase->nama }}</td>
-                <td class="tg-rv4w">{{ $petugase->perijinan->nama }}</td>
-                <td class="tg-rv4w">{{ $petugase->lokasi }}</td>
-                <td class="tg-rv4w">{{ $petugase->verifikasi }}</td>
-                <td class="tg-rv4w">{{ $petugase->email }}</td>
-                <td class="tg-rv4w">{{ $petugase->created_at }}</td>          
+                <td class="tg-rv4w">{{ $usersCollectione->email }}</td>
+                <td class="tg-rv4w">{{ $usersCollectione->password }}</td>
+                <td class="tg-rv4w">{{ $usersCollectione->first_name }}</td>
+                <td class="tg-rv4w">{{ $usersCollectione->last_name }}</td>
+                <td class="tg-rv4w">{{ $usersCollectione->created_at }}</td>
             </tr>
             @endforeach
         </tbody>

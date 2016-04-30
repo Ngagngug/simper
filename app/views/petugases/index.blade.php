@@ -24,29 +24,17 @@
 @section('content')
 
    {{ Datatable::table()
-    ->addColumn( 'perijinan', 'id', 'lokasi', 'nama', 'verifikasi', 'created_at', '')       // these are the column headings to be shown
+    ->addColumn( 'first_name', 'created_at', '')       // these are the column headings to be shown
     ->setOptions('aoColumnDefs',array(
         array(
-            'sTitle' => 'Perijinan',
+            'sTitle' => 'Nama',
             'aTargets' => [0]),
-        array(
-            'bVisible' => false,
+         array(
+            'sTitle' => 'Register',
             'aTargets' => [1]),
         array(
-            'sTitle' => 'Lokasi',
-            'aTargets' => [2]),
-        array(
-            'sTitle' => 'Nama',
-            'aTargets' => [3]),
-         array(
-            'sTitle' => 'Verifikasi',
-            'aTargets' => [4]),
-         array(
-            'sTitle' => 'Pendaftaran',
-            'aTargets' => [5]),
-        array(
             'bSortable' => false,
-            'aTargets' => [6])
+            'aTargets' => [2])
         ))
     ->setOptions('bProcessing', true)
     ->setUrl(route('admin.petugases.index'))   // this is the route where data will be retrieved
