@@ -15,12 +15,4 @@ class User extends SentryUserModel
     // Don't forget to fill this array
     protected $fillable = ['first_name', 'last_name', 'email', 'password'];
 
-	/**
-	 * Relasi pivot (Many-to-Many) dengan buku
-	 * @return Collection
-	 */
-	public function books()
-    {
-        return $this->belongsToMany('Book')->withPivot('returned')->withTimestamps();
-    }
 }

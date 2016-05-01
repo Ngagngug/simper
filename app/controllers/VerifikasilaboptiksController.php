@@ -26,7 +26,7 @@ class VerifikasilaboptiksController extends \BaseController {
 	            ->orderColumns('nama', 'verifikasi', 'updated_at')
 	            ->make();
 	    }
-		return View::make('verifikasilaboptiks.index')->withTitle('Verifikasi Lab Klinik Umum Pratama');
+		return View::make('verifikasilaboptiks.index')->withTitle('Verifikasi Lab Optiks');
 	
 	}
 

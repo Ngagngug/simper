@@ -39,6 +39,9 @@ Route::get('/tes', function()
 
 Route::group(array('before' => 'auth'), function () {
     Route::get('dashboard', array('as'=>'dashboard', 'uses'=>'HomeController@dashboard'));
+    Route::get('editpassword', array('as'=>'home.editpassword', 'uses'=>'HomeController@editpassword'));
+    Route::post('updatepassword', array('as'=>'home.updatepassword', 'uses'=>'HomeController@updatePassword'));
+
 
     Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
     {

@@ -27,7 +27,7 @@ class VisitasiunittransfusidarahsController extends \BaseController {
 	            ->orderColumns('nama', 'verifikasi', 'updated_at')
 	            ->make();
 	    }
-		return View::make('visitasiunittransfusidarahs.index')->withTitle('Visitasi Toko Obat');
+		return View::make('visitasiunittransfusidarahs.index')->withTitle('Visitasi Unit Transfusi Darah');
 
 	}
 

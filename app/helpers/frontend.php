@@ -85,7 +85,21 @@ Form::macro('submitUI', function($title) {
 HTML::macro('smartNav', function($url, $title) {
   $class = '';
   if ($url == Request::url()) {
-    $class = 'uk-active';
+    $class = 'active';
   }
   return "<li class=\"$class\"><a href=\"$url\">$title</a></li>";
+});
+
+/**
+ * Macro for UIKIT text
+ * @return string html
+ */
+Form::macro('passwordUI', function($name, $placeholder = null, $icon = null) {
+  $html = '';
+  $html .= "<div class=\"input-group\"><div class=\"input-group-addon\">
+            <i class=\"$icon\"></i></div>";
+  $html .= Form::password($name, array('class' => 'form-control','placeholder'=>$placeholder));
+  $html .= "</div>";
+
+  return $html;
 });

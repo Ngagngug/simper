@@ -39,10 +39,11 @@
         </tbody>
     </table>
 
-    <br><br>
-    <span id="todays_date" style="font-family:Arial; font-size:14px;">
-   <p>Boyolali, {{ $ldate = date('d-m-Y') }}</p>
-  <p>Petugas Surat Perijinan</p>
+  <br><br>
+  <span id="todays_date" style="font-family:Arial; font-size:14px;">
+  <p>Boyolali, {{ $ldate = date('d-m-Y') }}</p>
+  <p>Petugas Perijinan</p>
+  <p>  {{ Sentry::getUser()->first_name . ' ' . Sentry::getUser()->last_name }} </p>
   <br>
   <p>...................................</p>
   </span>

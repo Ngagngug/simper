@@ -25,13 +25,14 @@
                     <img src="/assets/dist/img/doctor.png" class="img-circle" alt="User Image">
                     <p>
                       {{ Sentry::getUser()->first_name . ' ' . Sentry::getUser()->last_name }} - Administrator
-                      <small>Member since Maret. 2016</small>
+                      <small>Last Login  {{ Sentry::getUser()->last_login }} </small>
+                      <small>{{ Sentry::getUser()->last_login->diffForHumans() }}</small>
                     </p>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                       <a href="{{ URL::to('editpassword') }}" class="btn btn-default btn-flat">Password</a>
                     </div>
                     <div class="pull-right">
                       <a href="{{ URL::to('logout') }}" class="btn btn-default btn-flat">Logout</a>

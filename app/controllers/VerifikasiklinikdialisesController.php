@@ -29,7 +29,7 @@ class VerifikasiklinikdialisesController extends \BaseController {
 	            ->orderColumns('nama', 'verifikasi', 'updated_at')
 	            ->make();
 	    }
-		return View::make('verifikasiklinikdialises.index')->withTitle('Verifikasi Klinik');
+		return View::make('verifikasiklinikdialises.index')->withTitle('Verifikasi Klinik Dialisis');
 	}
 
 	/**

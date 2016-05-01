@@ -19,7 +19,21 @@ class HomeController extends BaseController {
 
 	public function dashboard()
 	{
-		$this->layout->content = View::make('dashboard.index')->withTitle('Dashboard');
+		$user = Sentry::getUser();
+        $admin = Sentry::findGroupByName('admin');
+        $regular = Sentry::findGroupByName('regular');
+
+        // is admin
+        if ($user->inGroup($admin)) {  
+            $this->layout->content = View::make('dashboard.admin')
+                    ->withTitle('Dashboard');
+        }
+
+        // is regular user
+        if ($user->inGroup($regular)) {
+            $this->layout->content = View::make('dashboard.regular')
+                    ->withTitle('Dashboard');
+        }
 	}
 
 	public function authenticate()
@@ -53,5 +67,40 @@ class HomeController extends BaseController {
 	{
 		return View::make('hello');
 	}
+
+     public function editPassword()
+    {
+        $this->layout->content = View::make('dashboard.editpassword')
+            ->withTitle('Ubah Password');
+    }
+
+    /**
+     * Ubah password user
+     * @return response
+     */
+    public function updatePassword()
+    {
+        $user = Sentry::getUser();
+
+        // validasi password lama
+        if(!$user->checkPassword(Input::get('oldpassword'))) {
+            return Redirect::back()->with('errorMessage', 'Password Lama Anda salah.');
+        }
+
+        // validasi konfirmasi password baru
+        $rules = array('newpassword' => 'confirmed|required|min:5');
+        $validator = Validator::make($data = Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        // Simpan password baru
+        $user->password = Input::get('newpassword');
+        $user->save();
+
+        // Redirect ke halaman sebelumnya
+        return Redirect::back()->with('successMessage', 'Password berhasil diubah.');
+    }
 
 }

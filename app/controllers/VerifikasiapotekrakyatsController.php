@@ -26,7 +26,7 @@ class VerifikasiapotekrakyatsController extends \BaseController {
 	            ->orderColumns('nama', 'verifikasi', 'updated_at')
 	            ->make();
 	    }
-		return View::make('verifikasiapotekrakyats.index')->withTitle('Verifikasi Optikal');
+		return View::make('verifikasiapotekrakyats.index')->withTitle('Verifikasi Apotek Rakyat');
 	}
 
 	/**

@@ -35,7 +35,7 @@
                           </div>
                         </div><br><br>
  
-                       </div>
+   </div>
                       <div class="box-footer">
                           {{ Form::submitUI('Simpan') }}
                       </div>

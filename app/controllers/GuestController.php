@@ -17,7 +17,7 @@ class GuestController extends BaseController {
         if (Sentry::check()) {
             return Redirect::to('dashboard');
         }
-        $this->layout->content = View::make('guest.index')->withTitle("Test");
+        $this->layout->content = View::make('guest.index')->withTitle("Chart Pelamar Perijinan");
     }
 
     /**
@@ -26,6 +26,11 @@ class GuestController extends BaseController {
      */
     public function login()
     {
+        // Redirect to dashboard if user has logged in
+        if (Sentry::check()) {
+            Session::reflash();
+            return Redirect::to('dashboard');
+        }
         $this->layout->content = View::make('guest.login');
     }
 

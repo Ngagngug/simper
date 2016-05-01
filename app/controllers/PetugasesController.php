@@ -10,7 +10,7 @@ class PetugasesController extends \BaseController {
 	{
 		if(Datatable::shouldHandle())
 	    {
-        	$usersArray = Sentry::findAllUsersWithAccess('regular');
+        	$usersArray = Sentry::findAllUsersWithAccess('admin');
             $usersCollection = new Illuminate\Database\Eloquent\Collection($usersArray);
 
 	        return Datatable::collection($usersCollection)
@@ -60,7 +60,7 @@ class PetugasesController extends \BaseController {
 
 		$petugases = Sentry::register(Input::all(), true);
 
-		$regularGroup = Sentry::findGroupByName('regular');
+		$regularGroup = Sentry::findGroupByName('admin');
 
             // Masukkan user ke grup regular
         $petugases->addGroup($regularGroup);
@@ -167,7 +167,7 @@ class PetugasesController extends \BaseController {
         //     return Redirect::back()->withErrors($validator);
         // }
 
-		$usersArray = Sentry::findAllUsersWithAccess('regular');
+		$usersArray = Sentry::findAllUsersWithAccess('admin');
 	    $usersCollection = new Illuminate\Database\Eloquent\Collection($usersArray);
 			
 
@@ -202,7 +202,7 @@ class PetugasesController extends \BaseController {
                 $sheet->row($row, array(
                     'Email',
                     'Password',
-                    'Nama Depam',
+                    'Nama Depan',
                     'Nama Belakang',
                     'Registrasi',     
                 ));

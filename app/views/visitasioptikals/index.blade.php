@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
       <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Visitasi </a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> Visitasi Optikals </a></li>
             <li class="active">{{ $title }}</li>
       </ol>
 @stop

@@ -4,7 +4,7 @@
 
 @section('breadcrumb')
        <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard </a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard Admin </a></li>
             <li class="active">{{ $title }}</li>
       </ol>
 @stop

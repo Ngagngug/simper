@@ -27,7 +27,7 @@ class VisitasilabklinikumumsController extends \BaseController {
 	            ->orderColumns('nama', 'verifikasi', 'updated_at')
 	            ->make();
 	    }
-		return View::make('visitasilabklinikumums.index')->withTitle('Visitasi Klinik Umum');
+		return View::make('visitasilabklinikumums.index')->withTitle('Visitasi Klinik Umum Pratama');
 
 	}
 
