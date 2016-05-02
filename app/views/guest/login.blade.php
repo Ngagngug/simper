@@ -73,8 +73,7 @@
           </div>
         {{ Form::close() }}
 
-        <a href="#">Lupa Password</a><br>
-        <a href="register.html" class="text-center">Daftar Baru</a>
+        <a href="{{ URL::to('forgot') }}">Lupa Password</a><br>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

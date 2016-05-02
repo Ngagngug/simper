@@ -193,3 +193,9 @@ Route::group(array('before' => 'auth'), function () {
 Route::get('login', array('as'=>'guest.login', 'uses'=>'GuestController@login'));
 Route::post('authenticate', 'HomeController@authenticate');
 Route::get('logout', 'HomeController@logout');
+Route::get('forgot', array('as'=>'guest.forgot', 'uses'=>'GuestController@forgotPassword'));
+Route::post('sendresetcode', array('as'=>'guest.sendresetcode', 'uses'=>'GuestController@sendResetCode'));
+Route::get('reset', array('as'=>'guest.createnewpassword', 'uses'=>'GuestController@createNewPassword'));
+Route::post('reset', array('as'=>'guest.storenewpassword', 'uses'=>'GuestController@storeNewPassword'));
+
+
