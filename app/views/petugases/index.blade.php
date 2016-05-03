@@ -24,7 +24,7 @@
 @section('content')
 
    {{ Datatable::table()
-    ->addColumn( 'first_name', 'created_at', '')       // these are the column headings to be shown
+    ->addColumn( 'first_name', 'created_at', 'last_login', '')       // these are the column headings to be shown
     ->setOptions('aoColumnDefs',array(
         array(
             'sTitle' => 'Nama',
@@ -32,9 +32,12 @@
          array(
             'sTitle' => 'Register',
             'aTargets' => [1]),
+         array(
+            'sTitle' => 'Login Terakhir',
+            'aTargets' => [2]),
         array(
             'bSortable' => false,
-            'aTargets' => [2])
+            'aTargets' => [3])
         ))
     ->setOptions('bProcessing', true)
     ->setUrl(route('admin.petugases.index'))   // this is the route where data will be retrieved

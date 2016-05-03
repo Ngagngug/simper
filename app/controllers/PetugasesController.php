@@ -18,6 +18,9 @@ class PetugasesController extends \BaseController {
 				   return $model->first_name . ' ' . $model->last_name;
 				   })
 	            ->showColumns('created_at')
+	            ->addColumn('last_login', function($model) {
+                    return ($model->last_login ? $model->last_login->toDateTimeString() : '');
+                })
 	            ->addColumn('', function ($model) {
                     $html = '<center> <a href="'.route('admin.petugases.edit', ['petugases'=>$model->id]).'" class="btn btn-sm btn-default">edit</a> ';
 					$html .= Form::open(array('url' => route('admin.petugases.destroy', ['petugases'=>$model->id]), 'method'=>'delete', 'class'=>'inline js-confirm'));
@@ -25,8 +28,8 @@ class PetugasesController extends \BaseController {
 					$html .= Form::close();
 					return $html;
                 })
-	            ->searchColumns('first_name', 'created_at')
-	            ->orderColumns('first_name', 'created_at')
+	            ->searchColumns('first_name', 'created_at', 'last_login')
+	            ->orderColumns('first_name', 'created_at', 'last_login')
 	            ->make();
 	    }
 		return View::make('petugases.index')->withTitle('Petugas');

@@ -27,7 +27,7 @@
             'sTitle' => 'Nama',
             'aTargets' => [1]),
         array(
-            'sTitle' => 'Verifikasi',
+            'sTitle' => 'Status Verifikasi',
             'aTargets' => [2]),
          array(
             'sTitle' => 'Tanggal Verifikasi',
