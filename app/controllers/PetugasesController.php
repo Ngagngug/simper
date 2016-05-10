@@ -107,7 +107,7 @@ class PetugasesController extends \BaseController {
 	{
 		$petugase = Petugase::findOrFail($id);
 
-		$validator = Validator::make($data = Input::all(), $petugase->updateRules());
+		$validator = Validator::make($data = Input::all(), Petugase::$rulespass);
 
 		if ($validator->fails())
 		{
@@ -203,8 +203,7 @@ class PetugasesController extends \BaseController {
             $excel->sheet('Data Petugas', function($sheet) use ($usersCollection) {
                 $row = 1;
                 $sheet->row($row, array(
-                    'Email',
-                    'Password',
+                    'Email', 
                     'Nama Depan',
                     'Nama Belakang',
                     'Registrasi',     
@@ -212,7 +211,6 @@ class PetugasesController extends \BaseController {
                 foreach ($usersCollection as $usersCollectione) {
                    $sheet->row(++$row, array(
                     $usersCollectione->email,
-                    $usersCollectione->password,
                     $usersCollectione->first_name,
                     $usersCollectione->last_name,
                     $usersCollectione->created_at,

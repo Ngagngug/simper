@@ -15,13 +15,6 @@
                         </div><br><br>
 
                         <div class="form-group">
-                          {{ Form::labelUIHorizontal('password', 'Password') }}
-                          <div class="col-sm-10">
-                        {{ Form::textUI('password', 'Masukan Password','fa fa-asterisk') }}
-                          </div>
-                        </div><br><br>
-
-                        <div class="form-group">
                           {{ Form::labelUIHorizontal('first_name', 'Nama Depan') }}
                           <div class="col-sm-10">
                         {{ Form::textUI('first_name', 'Masukan Nama Depan','fa fa-user') }}
@@ -40,9 +33,3 @@
                           {{ Form::submitUI('Simpan') }}
                       </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-        $("#perijinan_id").select2();
-    });
-</script>

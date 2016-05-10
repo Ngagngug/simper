@@ -19,7 +19,6 @@ class Petugase extends SentryUserModel {
 		'first_name' => 'required',
 		'last_name' => 'required',
 		'email' => 'required',
-		'password' => 'required|min:5',
 	];
 
 	public function updateRules()

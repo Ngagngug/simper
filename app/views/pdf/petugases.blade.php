@@ -20,7 +20,6 @@
         <thead>
             <tr>
                 <td class="tg-3wr7">Email</td>
-                <td class="tg-3wr7">Password</td>
                 <td class="tg-3wr7">Nama Depan</td>
                 <td class="tg-3wr7">Nama Belakang</td>
                 <td class="tg-3wr7">Registrasi</td>
@@ -30,7 +29,6 @@
             @foreach ($usersCollection as $usersCollectione)
             <tr>
                 <td class="tg-rv4w">{{ $usersCollectione->email }}</td>
-                <td class="tg-rv4w">{{ $usersCollectione->password }}</td>
                 <td class="tg-rv4w">{{ $usersCollectione->first_name }}</td>
                 <td class="tg-rv4w">{{ $usersCollectione->last_name }}</td>
                 <td class="tg-rv4w">{{ $usersCollectione->created_at }}</td>
