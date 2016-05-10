@@ -16,13 +16,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="assets/dist/img/doctor.png" class="user-image" alt="User Image">
+                  <img src="../../assets/dist/img/doctor.png" class="user-image" alt="User Image">
                   <span class="hidden-xs">{{ Sentry::getUser()->first_name . ' ' . Sentry::getUser()->last_name }} </span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="assets/dist/img/doctor.png" class="img-circle" alt="User Image">
+                    <img src="../../assets/dist/img/doctor.png" class="img-circle" alt="User Image">
                     <p>
                       {{ Sentry::getUser()->first_name . ' ' . Sentry::getUser()->last_name }} - Administrator
                       <small>Last Login  {{ Sentry::getUser()->last_login }} </small>

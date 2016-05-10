@@ -40,7 +40,7 @@ class PenggunasController extends \BaseController {
 	            ->orderColumns('perijinan', 'lokasi', 'nama', 'verifikasi', 'created_at')
 	            ->make();
 	    }
-		return View::make('penggunas.index')->withTitle('Pelamar');
+		return View::make('penggunas.index')->withTitle('Pemohon');
 	}
 
 	/**

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.masterup2')
 
 @section('title')
     {{ $title }}

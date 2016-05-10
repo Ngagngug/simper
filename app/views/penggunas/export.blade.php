@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.masterup3')
 
 @section('title')
     {{ $title }}
@@ -7,7 +7,7 @@
 @section('breadcrumb')
  <ol class="breadcrumb">
     <li><a href="/">Dashboard</a></li>
-    <li><a href="{{ route('admin.penggunas.index') }}">Registrasi</a></li>
+    <li><a href="{{ route('admin.penggunas.index') }}">Export Pemohon</a></li>
     <li class="active">{{ $title }}</li>
  </ol>
 @stop
