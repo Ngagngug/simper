@@ -29,6 +29,7 @@ class CreatePenggunasTable extends Migration {
 			$table->string('kecamatan', 30);
 			$table->string('desa', 30);
 			$table->string('alamat', 100);
+			$table->string('alamatdomisili', 100);
 			$table->string('kodepos', 30);
 			$table->string('nohp', 30);
 			$table->string('email', 30);

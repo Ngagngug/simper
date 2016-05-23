@@ -18,6 +18,7 @@ class Pengguna extends BaseModel {
 		'kecamatan' => 'required',
 		'desa' => 'required',
 		'alamat' => 'required',
+		'alamatdomisili' => 'required',
 		'kodepos' => 'numeric',
 		'nohp' => 'numeric',
 		'email' => 'required|email',

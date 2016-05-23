@@ -21,21 +21,21 @@
                         </div> <br><br>
 
                         <div class="form-group">
-                        {{ Form::labelUIHorizontal('lokasi', 'Nama Lokasi Perizinan') }}
+                        {{ Form::labelUIHorizontal('Lokasi', 'Nama Lokasi Perizinan') }}
                           <div class="col-sm-10">
                         {{ Form::textUI('lokasi', 'Masukan Lokasi Perizinan','fa fa-home') }}
                           </div>
                         </div><br><br>
 
                         <div class="form-group">
-                          {{ Form::labelUIHorizontal('nama', 'Nama Lengkap') }}
+                          {{ Form::labelUIHorizontal('Nama', 'Nama Lengkap') }}
                           <div class="col-sm-10">
                         {{ Form::textUI('nama', 'Masukan Nama Lengkap','fa fa-user') }}
                           </div>
                         </div><br><br>
 
                          <div class="form-group">
-                          {{ Form::labelUIHorizontal('noktp', 'Nomor KTP') }}
+                          {{ Form::labelUIHorizontal('No KTP', 'Nomor KTP') }}
                           <div class="col-sm-10">
                           {{ Form::textUI('noktp', 'Masukan Nomor KTP','fa fa-pencil-square-o') }}                     
                           </div>
@@ -54,7 +54,7 @@
                         </div> <br><br>
 
                          <div class="form-group">
-                         {{ Form::labelUIHorizontal('tempatlahir', 'Tempat Lahir') }}
+                         {{ Form::labelUIHorizontal('Tempat Lahir', 'Tempat Lahir') }}
                           <div class="col-sm-10">
                           {{ Form::textUI('tempatlahir', 'Masukan Tempat Lahir','fa fa-street-view') }}
                           </div>
@@ -88,44 +88,51 @@
                         </div> <br><br>
 
                          <div class="form-group">
-                          {{ Form::labelUIHorizontal('pekerjaan', 'Pekerjaan') }}
+                          {{ Form::labelUIHorizontal('Pekerjaan', 'Pekerjaan') }}
                           <div class="col-sm-10">
                            {{ Form::textUI('pekerjaan', 'Masukan Pekerjaan','fa fa-user-md') }}
                           </div>
                         </div><br><br>
 
                           <div class="form-group">
-                          {{ Form::labelUIHorizontal('provinsi', 'Provinsi') }}
+                          {{ Form::labelUIHorizontal('Provinsi', 'Provinsi') }}
                           <div class="col-sm-10">
                             {{ Form::textUI('provinsi', 'Masukan Provinsi','fa fa-file') }}
                           </div>
                         </div><br><br>
 
                         <div class="form-group">
-                          {{ Form::labelUIHorizontal('kabupaten', 'Kota/Kabupaten') }}
+                          {{ Form::labelUIHorizontal('Kota/Kabupaten', 'Kota/Kabupaten') }}
                           <div class="col-sm-10">
                             {{ Form::textUI('kabupaten', 'Masukan Kota/Kabupaten','fa fa-file-text') }}      
                           </div>
                         </div><br><br>
 
                        <div class="form-group">
-                        {{ Form::labelUIHorizontal('kecamatan', 'Kecamatan') }}
+                        {{ Form::labelUIHorizontal('Kecamatan', 'Kecamatan') }}
                           <div class="col-sm-10">
                              {{ Form::textUI('kecamatan', 'Masukan Kecamatan','fa fa-file-text') }}     
                           </div>
                         </div><br><br> 
 
                          <div class="form-group">
-                           {{ Form::labelUIHorizontal('desa', 'Desa / Kelurahan') }}
+                           {{ Form::labelUIHorizontal('Desa', 'Desa / Kelurahan') }}
                           <div class="col-sm-10">
                             {{ Form::textUI('desa', 'Masukan Desa / Kelurahan','fa fa-file-text') }}
                           </div>
                         </div><br><br> 
 
                          <div class="form-group">
-                           {{ Form::labelUIHorizontal('alamat', 'Alamat Sesuai KTP') }}                          
+                           {{ Form::labelUIHorizontal('Alamat', 'Alamat Sesuai KTP') }}                          
                           <div class="col-sm-10">
                             {{ Form::textUI('alamat', 'Masukan Alamat Sesuai KTP','fa fa-road') }}
+                          </div>
+                        </div><br><br> 
+
+                         <div class="form-group">
+                           {{ Form::labelUIHorizontal('Alamat Domisili', 'Alamat Domisili Sekarang') }}                          
+                          <div class="col-sm-10">
+                            {{ Form::textUI('alamatdomisili', 'Masukan Alamat Domisili Sekarang','fa fa-road') }}
                           </div>
                         </div><br><br> 
 
@@ -137,14 +144,14 @@
                         </div><br><br> 
 
                       <div class="form-group">
-                        {{ Form::labelUIHorizontal('nohp', 'Nomor Handphone') }}
+                        {{ Form::labelUIHorizontal('No HP', 'Nomor Handphone') }}
                           <div class="col-sm-10">
                                 {{ Form::textUI('nohp', 'Masukan Nomor Handphone','fa fa-phone-square') }}
                           </div>
                         </div><br><br>  
 
                         <div class="form-group">
-                          {{ Form::labelUIHorizontal('email', 'Email') }}
+                          {{ Form::labelUIHorizontal('Email', 'Email') }}
                       
                           <div class="col-sm-10">
                            {{ Form::textUI('email', 'Masukan Email','fa fa-at') }}     
